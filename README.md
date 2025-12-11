@@ -1,52 +1,71 @@
-Project Description
+# ⭐ Personal Data Privacy Dashboard (PDPD)
 
-The Personal Data Privacy Dashboard is a web application that provides users with a clear overview of their Google account’s privacy and security status. Many users are unaware of how many third-party applications have access to their account, what permissions those apps hold, or where their account has recently been used. This project organizes that information into a simple dashboard to help users identify potential risks and understand how their data is being accessed.
+## 📘 Project Idea
+The Personal Data Privacy Dashboard (PDPD) is a web application that helps users understand how their Google account data is accessed, used, and potentially exposed. Many users are unaware of which apps are connected to their accounts, how tracking works, or whether suspicious activity has occurred. PDPD provides a clear, user-friendly dashboard that visualizes privacy risks and offers actionable recommendations.
 
-The application uses Google OAuth to retrieve safe, non-sensitive metadata such as connected applications, device sessions, login activity, and high-level tracking settings. The system then analyzes this data to generate a basic Privacy Score and highlight areas that may require attention. The goal is to make account privacy easier to understand, even for non-technical users.
+## 📝 Project Description
+Using secure Google OAuth authentication, PDPD scans a user’s Google account and retrieves non-sensitive metadata such as connected applications, permissions, login activity, device history, and tracking settings.  
+The system analyzes this information to generate a privacy score, highlight vulnerabilities, and suggest steps for improving account safety.
 
-Features
-• Google Authentication
+This project demonstrates skills in API integration, full-stack development, authentication, and designing user-focused privacy tools. It is simple enough for early developers to build, yet strong enough to feature in portfolios.
 
-Secure login using Google OAuth 2.0. The application only accesses metadata required for the privacy analysis.
+## ✨ Core Functionalities
 
-• Connected Applications Overview
+### 🔐 Google Login (OAuth 2.0)
+- Secure Google sign-in  
+- Accesses metadata only  
+- Allows the app to scan connected apps and account activity  
 
-Displays all third-party apps linked to the user’s Google account, along with their permission scopes, connection dates, and simple risk indicators.
+### 📱 Connected Apps Scanner
+- Lists third-party apps linked to the Google account  
+- Shows permission scopes, risk levels, and connection dates  
+- Highlights outdated or unnecessary permissions  
 
-• Privacy Score
+### 📊 Privacy Score
+- Calculates a score (0–100) based on:  
+  - Number of connected apps  
+  - High-risk permissions  
+  - Missing two-factor authentication  
+  - Old or unknown devices  
+  - Tracking settings  
 
-Calculates a score (0–100) based on:
+### 🛡️ Login Activity Overview
+- Displays recent login events  
+- Shows device type and approximate country  
+- Flags unusual login behavior  
 
-Number of connected apps
+### 💻 Device List
+- Lists all devices logged into the account  
+- Marks old devices (inactive for 60+ days)  
+- Identifies unknown or suspicious devices  
 
-High-risk permissions
+### 👁️ Tracking & Personalization Overview
+- Shows tracking settings:  
+  - Ad Personalization  
+  - Web & App Activity  
+  - YouTube History  
+- Explains what each setting means  
+- Suggests ways to reduce tracking  
 
-Old or unknown devices
+### ⚠️ Action Center
+- Centralized list of recommended security actions  
+- Examples:  
+  - Remove high-risk apps  
+  - Enable 2FA  
+  - Review suspicious logins  
+  - Adjust tracking settings  
+- Each action includes a description, risk level, and link to Google settings  
 
-Tracking settings
+### 👤 User Profile Summary
+- Shows name, email, profile picture, and account age  
+- Displays overall privacy and security status  
 
-Two-factor authentication status
+### ⚙️ Settings
+- Light/Dark mode  
+- Refresh scan data  
+- Manage connected accounts  
 
-• Login Activity
+### 📘 Tips & Information
+- Simple explanations of permissions, tracking, and online safety  
+- Educational content to help users stay secure  
 
-Shows recent login events with device type and approximate location. Highlights unusual or unfamiliar activity.
-
-• Active Devices
-
-Lists all devices currently logged into the user’s Google account and marks any that appear inactive or unrecognized.
-
-• Tracking & Personalization Overview
-
-Indicates the status of major tracking options such as ad personalization, Web & App Activity, and YouTube History.
-
-• Action Center
-
-Provides straightforward recommendations based on the user’s privacy status, with direct links to the appropriate Google settings pages.
-
-• User Profile Summary
-
-Displays basic account information such as name, email, profile photo, and account age.
-
-• Information Pages
-
-Includes simple explanations about how permissions, tracking features, and device sessions work, helping users understand their privacy data.
