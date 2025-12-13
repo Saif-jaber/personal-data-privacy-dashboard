@@ -105,3 +105,16 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.layout {
+  display: flex;
+  height: 100vh;
+  background: #0f1115;
+}
+
+.content {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+  color: #e5e7eb;
+}
