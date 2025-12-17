@@ -107,14 +107,32 @@ button:focus-visible {
 }
 
 .layout {
-  display: flex;
-  height: 100vh;
+  min-height: 100vh;
   background: #0f1115;
 }
 
+/* Main content */
 .content {
-  flex: 1;
+  margin-left: 260px;
   padding: 24px;
-  overflow-y: auto;
-  color: #e5e7eb;
+  height: 100vh;
+  overflow-y: auto;   /* ← THIS makes dashboard content scroll */
+  overflow-x: hidden;
 }
+
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .content {
+    margin-left: 220px;        /* sidebar becomes 220px */
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .content {
+    margin-left: 0;            /* sidebar overlays instead */
+    padding-top: 72px;         /* space for topbar */
+  }
+}
+

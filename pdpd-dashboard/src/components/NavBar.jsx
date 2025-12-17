@@ -40,7 +40,7 @@ const NavBar = () => {
           <p className="section-title">MENU</p>
 
           <NavLink
-            to="/"
+            to="/Dashboard"
             end
             onClick={closeSidebar}
             className={({ isActive }) =>
