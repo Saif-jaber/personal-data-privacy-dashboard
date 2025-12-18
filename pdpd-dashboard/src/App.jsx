@@ -1,9 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 import SignupPage from "./pages/Signup";
 import LoginPage from "./pages/Login";
-import HomePage from "./pages/Home";
 import Dashboard from "./components/Dashboard.jsx";
 import NavBarLayout from "./layouts/NavBarLayout.jsx";
+import ConnectedApps from "./pages/ConnectedApps.jsx";
+
 
 function App() {
   return (
@@ -12,11 +13,12 @@ function App() {
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/login" element={<LoginPage />} />
 
-      {/* Dashboard layout (WITH sidebar) */}
+      
       <Route element={<NavBarLayout />}>
-        <Route path="/dashboard" element={<Dashboard />}>
-          <Route index element={<HomePage />} />
-        </Route>
+        {/* Dashboard layout (WITH sidebar) */}
+        <Route path="/dashboard" element={<Dashboard />}></Route>
+        {/* connected apps page (with sidebar)*/}
+        <Route path="/connected-apps" element={<ConnectedApps />}></Route>
       </Route>
     </Routes>
   );

@@ -1,0 +1,20 @@
+/* ===== PAGE LAYOUT ===== */
+.connectedApps-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: #ffffff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ===== HEADER ===== */
+.connectedApps-header h1 {
+  font-size: 24px;
+  margin: 0 0 4px 0; /* remove top margin */
+}
+
+.connectedApps-header p {
+  color: #9ca3af;
+  margin-bottom: 24px;
+  font-size: 14px;
+}

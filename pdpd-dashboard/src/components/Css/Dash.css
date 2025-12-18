@@ -10,7 +10,7 @@
 /* ===== HEADER ===== */
 .dashboard-header h1 {
   font-size: 24px;
-  margin-bottom: 4px;
+  margin: 0 0 4px 0; /* remove top margin */
 }
 
 .dashboard-header p {
@@ -89,7 +89,7 @@
   gap: 6px;
   font-size: 12px;
   color: #7dd3fc;
-  margin-top: auto; /* 👈 key fix */
+  margin-top: auto;
 }
 
 /* ===== SUMMARY CARDS ===== */
@@ -112,7 +112,7 @@
 .card-icon-outline {
   width: 30px;
   height: 30px;
-  border: 1px solid #d1d5db;
+  border: 1px solid #000000;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -140,23 +140,36 @@
   gap: 6px;
   font-size: 12px;
   color: #16a34a;
-  margin-top: auto; /* 👈 key fix */
+  margin-top: auto;
 }
 
 .summary-change.danger {
   color: #dc2626;
 }
 
-/* ===== BADGES ===== */
-.badge {
-  background: #dcfce7;
-  color: #16a34a;
-  padding: 3px 6px;
-  border-radius: 6px;
+/* ===== STAT BADGES (SQUARE, SCOPED) ===== */
+.stat-badge {
+  width: 16px;
+  height: 16px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  border-radius: 4px;
+
   font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
 }
 
-.badge.danger {
+.stat-badge.success {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.stat-badge.danger {
   background: #fee2e2;
   color: #dc2626;
 }
@@ -167,7 +180,7 @@
   background: linear-gradient(135deg, #0a1f44, #0e2a66);
   border-radius: 20px;
   padding: 24px;
-  margin-bottom: 28px;
+  margin-bottom: 0px;
 }
 
 .weekly-analytics h3 {
@@ -186,17 +199,18 @@
 
 .analytics-item {
   flex: 1;
+  height: 100%;               /* 🔥 REQUIRED */
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-end;  /* bars grow from bottom */
   gap: 10px;
 }
 
 .analytics-bar {
   width: 100%;
-  min-height: 22px;
-  border-radius: 14px;
-  align-self: flex-end;
+  height: 0;                 /* base */
+  border-radius: 30px;
   background: repeating-linear-gradient(
     45deg,
     rgba(255,255,255,0.35),
@@ -204,7 +218,9 @@
     rgba(255,255,255,0.15) 6px,
     rgba(255,255,255,0.15) 12px
   );
+  transition: height 0.4s ease;
 }
+
 
 .analytics-bar.active {
   background: linear-gradient(135deg, #34d399, #22c55e);
@@ -248,29 +264,6 @@
   gap: 8px;
 }
 
-/* ===== ACTIONS ===== */
-.dashboard-actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.dashboard-actions button {
-  background: #1f2933;
-  color: #ffffff;
-  border: 1px solid #374151;
-  padding: 8px 14px;
-  border-radius: 8px;
-  font-size: 13px;
-  cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
-}
-
-.dashboard-actions button:hover {
-  background-color: #2563eb;
-  border-color: #2563eb;
-}
-
 /* ===== CARD CORNER ICON HOVER ===== */
 .card-icon,
 .card-icon-outline {
@@ -278,15 +271,110 @@
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-/* Filled icon (Privacy Score) */
 .card-icon:hover {
   background-color: #e5e7eb;
   transform: scale(1.05);
 }
 
-/* Outline icon (Summary cards) */
 .card-icon-outline:hover {
   background-color: rgba(0, 0, 0, 0.05);
   transform: scale(1.05);
 }
 
+/* ===== ANALYTICS TOOLTIP (WHITE) ===== */
+.analytics-bar {
+  position: relative;
+}
+
+/* Tooltip bubble */
+.analytics-bar::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+
+  background: #ffffff;
+  color: #111827;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+}
+
+/* Tooltip arrow */
+.analytics-bar::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  border-width: 6px;
+  border-style: solid;
+  border-color: #ffffff transparent transparent transparent;
+
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* Show tooltip on hover */
+.analytics-bar:hover::after,
+.analytics-bar:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.analytics-bar:hover::after {
+  transform: translateX(-50%) translateY(-2px);
+}
+
+.analytics-bar.active::after {
+  border: 1px solid #e5e7eb;
+}
+
+/* ===== ANALYTICS + WARNINGS RESPONSIVE LAYOUT (SAFE) ===== */
+.analytics-warnings-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Laptop / desktop only */
+@media (min-width: 1024px) {
+  .analytics-warnings-grid {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .weekly-analytics {
+    flex: 2;
+  }
+
+  .warnings-section {
+    flex: 1;
+    margin-bottom: 0; /* prevent extra spacing */
+  }
+}
+
+/* ===== QUICK WARNING HOVER EFFECT ===== */
+.warnings-section li {
+  transition: 
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.warnings-section li:hover {
+  transform: translateY(-2px);
+  background: rgba(220, 38, 38, 0.12);
+  box-shadow: 0 6px 14px rgba(220, 38, 38, 0.15);
+}

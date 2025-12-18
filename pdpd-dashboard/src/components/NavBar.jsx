@@ -52,7 +52,7 @@ const NavBar = () => {
           </NavLink>
 
           <NavLink
-            to="/apps"
+            to="/connected-apps"
             onClick={closeSidebar}
             className={({ isActive }) =>
               `sidebar-item ${isActive ? "active" : ""}`
