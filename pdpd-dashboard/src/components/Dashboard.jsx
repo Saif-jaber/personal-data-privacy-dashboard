@@ -58,7 +58,7 @@ const Dashboard = () => {
         <div className="summary-card">
           <div className="card-top">
             <h4>Recent Logins</h4>
-            <div className="card-icon-outline">↗</div>
+            <div className="card-icon-outline" onClick={()=> Navigate("/login-activity")}>↗</div>
           </div>
           <div className="summary-value">5</div>
           <div className="summary-change">

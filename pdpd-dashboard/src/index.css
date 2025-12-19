@@ -132,7 +132,12 @@ button:focus-visible {
 @media (max-width: 768px) {
   .content {
     margin-left: 0;            /* sidebar overlays instead */
-    padding-top: 72px;         /* space for topbar */
+    padding-top: 25px;         /* space for topbar */
   }
 }
 
+.login-activity-page {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}

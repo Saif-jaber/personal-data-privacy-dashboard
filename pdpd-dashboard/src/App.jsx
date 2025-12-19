@@ -4,6 +4,8 @@ import LoginPage from "./pages/Login";
 import Dashboard from "./components/Dashboard.jsx";
 import NavBarLayout from "./layouts/NavBarLayout.jsx";
 import ConnectedApps from "./pages/ConnectedApps.jsx";
+import LoginActivity from "./pages/LoginActivity.jsx";
+
 
 
 function App() {
@@ -15,10 +17,9 @@ function App() {
 
       
       <Route element={<NavBarLayout />}>
-        {/* Dashboard layout (WITH sidebar) */}
         <Route path="/dashboard" element={<Dashboard />}></Route>
-        {/* connected apps page (with sidebar)*/}
         <Route path="/connected-apps" element={<ConnectedApps />}></Route>
+        <Route path="/login-activity" element={<LoginActivity />}></Route>
       </Route>
     </Routes>
   );
