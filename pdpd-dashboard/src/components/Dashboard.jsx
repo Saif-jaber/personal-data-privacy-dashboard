@@ -45,10 +45,10 @@ const Dashboard = () => {
 
         <div className="summary-card">
           <div className="card-top">
-            <h4>High-Risk Apps</h4>
-            <div className="card-icon-outline">↗</div>
+            <h4>Suspecious Activity</h4>
+            <div className="card-icon-outline" onClick={()=> Navigate("/login-activity")}>↗</div>
           </div>
-          <div className="summary-value">3</div>
+          <div className="summary-value">2</div>
           <div className="summary-change danger">
             <span className="stat-badge danger">▲</span>
             Needs attention
@@ -69,10 +69,10 @@ const Dashboard = () => {
 
         <div className="summary-card">
           <div className="card-top">
-            <h4>Tracking Status</h4>
-            <div className="card-icon-outline">↗</div>
+            <h4>Active Devices</h4>
+            <div className="card-icon-outline" onClick={()=> Navigate("/devices")}>↗</div>
           </div>
-          <div className="summary-value text">Enabled</div>
+          <div className="summary-value">3</div>
           <div className="summary-change">
             <span className="stat-badge success">▲</span>
             Active

@@ -95,8 +95,8 @@ const LoginActivity = () => {
   return (
     <div className="login-activity-page">
       <div className="activity-header">
-        <h1>Login Activity</h1>
-        <p>Security and login events for your Google account</p>
+        <h1>Login Activity ({logs.length})</h1>
+        <p>Security and login events for your Google account (click to expand)</p>
       </div>
 
       {/* 🔍 Filters */}

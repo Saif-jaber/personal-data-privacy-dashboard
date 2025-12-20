@@ -55,7 +55,7 @@ const LoginForm = () => {
   
             <p className="switch-text">
               Don’t have an account?
-              <span onClick= {()=> navigate("/")}> Sign up</span>
+              <span onClick= {()=> navigate("/signup")}> Sign up</span>
             </p>
   
           </form>

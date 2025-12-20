@@ -5,7 +5,7 @@ const ConnectedApps = () => {
   return (
     <div className="connectedApps-page">
       <div className="connectedApps-header">
-        <h1>Connected Apps</h1>
+        <h1>Connected Apps (4)</h1>
         <p>An overview of apps connected to your email</p>
       </div>
       <AppscardLayout />
