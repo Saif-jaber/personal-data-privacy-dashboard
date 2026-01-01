@@ -85,17 +85,6 @@ const NavBar = () => {
           </NavLink>
 
           <NavLink
-            to="/tracking"
-            onClick={closeSidebar}
-            className={({ isActive }) =>
-              `sidebar-item ${isActive ? "active" : ""}`
-            }
-          >
-            <img src="src/assets/map-pin-alt-svgrepo-com.svg" className="icon" alt="" />
-            <span>Tracking</span>
-          </NavLink>
-
-          <NavLink
             to="/actions"
             onClick={closeSidebar}
             className={({ isActive }) =>

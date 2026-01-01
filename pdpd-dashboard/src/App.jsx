@@ -6,6 +6,7 @@ import NavBarLayout from "./layouts/NavBarLayout.jsx";
 import ConnectedApps from "./pages/ConnectedApps.jsx";
 import LoginActivity from "./pages/LoginActivity.jsx";
 import DevicesPage from "./pages/DevicesPage.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       {/* Auth pages (no sidebar) */}
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="*" element={<NotFound />} />
 
       <Route element={<NavBarLayout />}>
         <Route path="/dashboard" element={<Dashboard />}></Route>
