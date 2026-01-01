@@ -7,7 +7,7 @@ import ConnectedApps from "./pages/ConnectedApps.jsx";
 import LoginActivity from "./pages/LoginActivity.jsx";
 import DevicesPage from "./pages/DevicesPage.jsx";
 import NotFound from "./pages/NotFound.jsx";
-
+import LandingPage from "./pages/LandingPage.jsx";
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="*" element={<NotFound />} />
+      <Route path="/" element={<LandingPage />} />
 
       <Route element={<NavBarLayout />}>
         <Route path="/dashboard" element={<Dashboard />}></Route>
