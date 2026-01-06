@@ -1,0 +1,286 @@
+body{
+    background-color: #ffffff;
+}
+
+/* =======================
+   Navbar
+======================= */
+.navBarTop {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 2rem;
+  background: #ffffff;
+  color: #0b1f3b;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Logo */
+.logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #0b1f3b;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 2rem;
+  margin: 0 auto; /* center the tabs horizontally */
+}
+
+.tab-item {
+  position: relative;
+}
+
+.tabs button {
+  background: none;
+  border: none;
+  color: #0b1f3b;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 0.4rem 0;
+  outline: none;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+/* Tab hover highlight */
+.tabs button:hover {
+  color: #3b82f6;
+  text-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
+}
+
+/* Dropdown */
+.dropdown {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  min-width: 180px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* stronger shadow for pop */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px) scale(0.95); /* pop-in effect */
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 50;
+  padding: 0.5rem 0;
+}
+
+/* Dropdown links */
+.dropdown a {
+  display: block;
+  padding: 0.55rem 1rem;
+  color: #0b1f3b;
+  text-decoration: none;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.dropdown a:hover {
+  background: #f3f4f6;
+  color: #1e3a8a;
+  transform: translateX(3px); /* subtle slide on hover */
+}
+
+/* Show dropdown when tab is active */
+.tab-item.active .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+/* CTA Buttons */
+.cta-btn {
+  display: flex;
+  gap: 1rem;
+}
+
+.cta-btn a {
+  padding: 0.4rem 1rem;
+  border-radius: 5px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.cta-btn .login {
+  background: transparent;
+  border: 1px solid #0b1f3b;
+  color: #0b1f3b;
+}
+
+.cta-btn .login:hover {
+  background: #0b1f3b;
+  color: #ffffff;
+}
+
+.cta-btn .signup {
+  background: #3b82f6;
+  color: #ffffff;
+}
+
+.cta-btn .signup:hover {
+  background: #2563eb;
+}
+
+/* Responsive Navbar */
+@media (max-width: 900px) {
+  .tabs {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .navBarTop {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.5rem 1.5rem;
+    gap: 0.5rem;
+  }
+
+  .tabs {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    display: flex;
+  }
+
+  .cta-btn {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .cta-btn a {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* =======================
+   Hero Section
+======================= */
+.hero {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  padding: 3rem 4rem;
+  background: radial-gradient(circle at top right, #1e3a8a 0%, #0b1f3b 60%);
+  color: #eaf1ff;
+}
+
+.hero-content {
+  max-width: 600px;
+}
+
+/* Headline */
+.hero h1 {
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  line-height: 1.2;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.hero h1 span {
+  display: block;
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+/* Description */
+.hero p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #b8c7e6;
+  max-width: 500px;
+  margin-bottom: 1.5rem;
+}
+
+/* Hero Actions */
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.65rem 1.4rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.btn-primary {
+  background: #3b82f6;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  color: #eaf1ff;
+  opacity: 0.85;
+}
+
+.btn-secondary:hover {
+  opacity: 1;
+}
+
+/* =======================
+   Responsive Hero
+======================= */
+@media (max-width: 768px) {
+  .hero {
+    padding: 2rem 1.5rem;
+    min-height: auto;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-badges {
+    justify-content: flex-start;
+  }
+}
+
+/* Check Your Privacy button hover like login button but lighter */
+.btn-primary {
+  background: #3b82f6; /* original blue */
+  color: #ffffff;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: #93c5fd; /* lighter blue on hover */
+  color: #0b1f3b; /* dark text on hover for contrast */
+  transform: none; /* remove the lift effect */
+}
