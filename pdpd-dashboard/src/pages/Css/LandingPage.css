@@ -194,7 +194,7 @@ html, body {
   .dashboard-card-wide, .feature-grid-row { grid-template-columns: 1fr; }
   .hero { flex-direction: column; text-align: center; padding-top: 5rem; }
   .hero-animation { transform: scale(0.8); justify-content: center; }
-  .loader { margin-left: 0; } 
+  .loader { margin-left: 0; display: none;} 
   .hero p { margin-left: auto; margin-right: auto; }
   .hero-actions { justify-content: center; }
   .tabs { display: none; }
