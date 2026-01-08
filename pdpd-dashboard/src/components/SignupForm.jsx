@@ -1,13 +1,14 @@
 import "./Css/Form.css";
-import { useNavigate } from "react-router-dom";
 
-const Signup = () => {
-
-    const navigate = useNavigate();   // to navigate to other routes
+const Signup = ({ onClose, onSwitch }) => {
 
     return (
       <div className="signup-wrapper">
         <div className="signup-card">
+
+          <button className="close-btn" onClick={onClose}>
+            &times;
+          </button>
   
           {/* Header */}
           <div className="signup-header">
@@ -56,7 +57,7 @@ const Signup = () => {
   
             <p className="switch-text">
               Already have an account?
-              <span onClick= {()=> navigate("/Login")}> Login in</span>
+               <span onClick={onSwitch}> Login in</span>
             </p>
   
           </form>

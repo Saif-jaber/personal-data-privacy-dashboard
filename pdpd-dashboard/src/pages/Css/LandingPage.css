@@ -225,3 +225,36 @@ html, body {
 .dashboard-right img:hover {
   transform: scale(1.03); /* subtle hover zoom effect */
 }
+
+/* 1. The transition makes the blur look smooth instead of a sudden flash */
+.main-wrapper {
+  transition: filter 0.3s ease, transform 0.3s ease;
+  width: 100%;
+}
+
+/* 2. This is the 'Freeze' state */
+.content-blurred .main-wrapper {
+  filter: blur(8px);           /* Blurs the background */
+  pointer-events: none;        /* Makes background unclickable */
+  user-select: none;           /* Prevents text highlighting */
+  transform: scale(0.98);      /* Optional: slightly shrinks background for depth */
+}
+
+/* Update this in LandingPage.css */
+.main-wrapper {
+  transition: filter 0.3s ease; /* Removed transform transition */
+  width: 100%;
+}
+
+.content-blurred .main-wrapper {
+  filter: blur(8px);
+  pointer-events: none;
+  user-select: none;
+  /* Removed transform: scale(0.98) -> This stops the shrinking */
+  
+  /* Optional: keeps the background consistent */
+  opacity: 0.9; 
+}
+
+
+

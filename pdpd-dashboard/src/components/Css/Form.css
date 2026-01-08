@@ -240,3 +240,76 @@ a {
     grid-column: span 1 !important;
   }
 }
+
+/* Ensure the card container allows children to be positioned absolutely */
+.login-card, 
+.signup-card {
+  position: relative; 
+  overflow: visible; /* Crucial: ensures the X isn't cut off */
+}
+
+.close-btn {
+  /* Position it strictly in the top right */
+  position: absolute;
+  top: -15px;    /* Moves it slightly above the card edge */
+  right: -15px;  /* Moves it slightly outside the right edge */
+  
+  /* Circular button style to make it "pop" */
+  width: 32px;
+  height: 32px;
+  background-color: white;
+  border: 2px solid #333;
+  border-radius: 50%;
+  
+  /* Text styling */
+  color: #333;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1;
+  
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Interaction */
+  cursor: pointer;
+  z-index: 9999; /* Force it above everything */
+  pointer-events: auto !important; /* Forces it to be clickable */
+  
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.1);
+}
+
+/* Add or update this in your Form.css */
+.login-wrapper, .signup-wrapper {
+  display: contents; /* This is the magic line */
+}
+
+/* Ensure the card itself doesn't have huge margins */
+.login-card, .signup-card {
+  margin: 0; 
+  position: relative;
+}
+
+/* This stops the wrappers from being 100% height when inside the modal */
+.modal-content .login-wrapper,
+.modal-content .signup-wrapper,
+.modal-content .page-center {
+  min-height: 0 !important;
+  height: auto !important;
+  width: auto !important;
+  display: block !important;
+  padding: 0 !important;
+}
+
+/* Ensure the card has no margins that push the X away */
+.modal-content .login-card,
+.modal-content .signup-card {
+  margin: 0 !important;
+}

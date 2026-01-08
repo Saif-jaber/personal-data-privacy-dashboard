@@ -1,14 +1,15 @@
 import "./Css/Form.css";
-import { useNavigate } from "react-router-dom";
 
-const LoginForm = () => {
-
-    const navigate = useNavigate(); // to navigate to other routes
+const LoginForm = ({ onClose, onSwitch }) => {
 
     return (
       <div className="login-wrapper">
         <div className="login-card">
-  
+
+          <button className="close-btn" onClick={onClose}>
+            &times;
+          </button>
+
           {/* Header */}
           <div className="login-header">
             <div className="header-row">
@@ -55,7 +56,7 @@ const LoginForm = () => {
   
             <p className="switch-text">
               Don’t have an account?
-              <span> Sign up</span>
+              <span onClick={onSwitch}> Sign up</span>
             </p>
   
           </form>

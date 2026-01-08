@@ -1,7 +1,7 @@
 .modal-overlay {
   position: fixed;
-  inset: 0; /* top:0; bottom:0; left:0; right:0 */
-  background-color: rgba(0,0,0,0.5);
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,20 +9,189 @@
 }
 
 .modal-content {
-  background-color: #ffffff00;
-  padding: 2rem;
-  border-radius: 10px;
-  max-width: 500px;
-  width: 90%;
-  position: relative;
+  background-color: transparent;
+  /* Remove ALL padding so the X can touch the edge of the form card */
+  padding: 0; 
+  position: relative; 
+  
+  /* This forces the container to be exactly the size of your LoginForm/SignupForm */
+  width: fit-content; 
+  height: fit-content;
+  max-width: 95%;
+  z-index: 1001;
 }
 
 .modal-close {
   position: absolute;
-  top: 10px;
-  right: 15px;
+  /* Increased these values to push the X into the white corner */
+  top: 25px; 
+  right: 25px;
+  
+  /* Minimalist X style to match your modern form */
+  width: 30px;
+  height: 30px;
   border: none;
-  background: none;
-  font-size: 1.5rem;
+  background: transparent; /* No white circle, just the X */
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  font-size: 28px;
+  color: #666; /* Subtle grey */
   cursor: pointer;
+  
+  /* Sit on top of the form header */
+  z-index: 2000 !important; 
+  line-height: 1;
+}
+
+.modal-close:hover {
+  color: #000;
+  transform: scale(1.1);
+}
+
+.modal-content {
+  position: relative;
+  /* Force the modal to be exactly the size of the form card */
+  width: fit-content;
+  height: fit-content;
+  
+  display: flex; /* Helps in wrapping the children tightly */
+  padding: 0;
+  background: transparent;
+  z-index: 1001;
+}
+
+.modal-close {
+  position: absolute;
+  /* These now calculate from the actual white corner of the card */
+  top: 15px;
+  right: 15px;
+  
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  color: #666;
+  cursor: pointer;
+  z-index: 2000;
+  line-height: 1;
+}
+
+.modal-content {
+  position: relative;
+  /* Shrink-wrap the form card */
+  width: fit-content;
+  height: fit-content;
+  background: transparent;
+  padding: 0;
+  z-index: 1001;
+}
+
+.modal-close {
+  position: absolute;
+  /* Adjust these to place it exactly in the white corner */
+  top: 15px; 
+  right: 15px;
+  
+  /* Use a clean style so it sits nicely on the white background */
+  width: 30px;
+  height: 30px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  color: #333;
+  font-size: 20px;
+  cursor: pointer;
+  
+  /* Sit on top of the form */
+  z-index: 9999 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.modal-close {
+  position: absolute;
+  /* Adjust these to nudge the X exactly where you want it inside the card */
+  top: 12px;
+  right: 12px;
+  
+  /* Make the button a perfect circle */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  
+  /* Remove all visible styling by default */
+  border: none;
+  background-color: transparent; 
+  
+  /* Text styling for the X */
+  font-size: 24px;
+  color: #4b5563; /* Subtle dark grey */
+  
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  
+  /* Smooth transition for the hover effect */
+  transition: background-color 0.2s ease, color 0.2s ease;
+  
+  /* High priority stacking */
+  z-index: 9999 !important;
+  line-height: 1;
+}
+
+/* Hover State: Subtle round background */
+.modal-close:hover {
+  background-color: rgba(0, 0, 0, 0.08); /* Light grey circular tint */
+  color: #000; /* Pop the X to black */
+}
+
+/* Active State: Slightly darker when clicked */
+.modal-close:active {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  
+  /* FIXED DIMENSIONS: Use equal width and height */
+  width: 36px;
+  height: 36px;
+  
+  /* FORCE CIRCLE */
+  border-radius: 50%;
+  aspect-ratio: 1 / 1; /* Ensures the box stays a square, making the radius a circle */
+  
+  /* REMOVE STRETCHING: Prevent parent flexbox from squishing it */
+  flex-shrink: 0; 
+  
+  /* STYLING */
+  border: none;
+  background-color: transparent; 
+  color: #4b5563;
+  font-size: 22px;
+  
+  /* ALIGNMENT */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  
+  line-height: 0; /* Helps prevent the text height from making it oval */
+  padding: 0;
+  transition: background-color 0.2s ease;
+  z-index: 9999 !important;
+}
+
+/* Hover: Subtle circular tint */
+.modal-close:hover {
+  background-color: rgba(0, 0, 0, 0.08); 
+  color: #000;
 }
