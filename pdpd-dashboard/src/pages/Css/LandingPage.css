@@ -96,7 +96,7 @@ html, body {
 
 .loader { 
   --cloud-color: #4387f4; 
-  --arrows-color: #ffffff; 
+  --arrows-color: #97d7ff; 
   --time-animation: 2.3s; 
   
   transform: scale(3.7); 
@@ -257,4 +257,567 @@ html, body {
 }
 
 
+.newsletter-footer {
+  background: #0b1f3b;
+  color: #cbd5e1;
+  padding: 5rem 2rem;
+}
 
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+
+/* Left - Subscription */
+.subscribe-area {
+  flex: 1;
+  min-width: 320px;
+}
+
+.subscribe-area h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0 0 1.2rem;
+  line-height: 1.1;
+  color: white;
+}
+
+.subscribe-area h2 span {
+  color: #3b82f6;
+}
+
+.subscribe-area p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  opacity: 0.85;
+  margin: 0 0 2.5rem;
+}
+
+.subscribe-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 1rem 2.8rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.subscribe-btn:hover {
+  background: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(16, 185, 129, 0.25);
+}
+
+/* Right - Links */
+.links-area {
+  display: flex;
+  gap: 3.5rem;
+  flex-wrap: wrap;
+}
+
+.links-column {
+  min-width: 160px;
+}
+
+.links-column h4 {
+  color: #60a5fa;
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.links-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.links-column li {
+  margin-bottom: 0.85rem;
+}
+
+.links-column a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.98rem;
+  transition: color 0.2s;
+}
+
+.links-column a:hover {
+  color: #e2e8f0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    gap: 5rem;
+  }
+
+  .links-area {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 640px) {
+  .subscribe-area h2 {
+    font-size: 2.4rem;
+  }
+
+  .links-area {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+}
+
+.pdpd-footer {
+  background: #0b1f3b;
+  color: #cbd5e1;
+  padding: 3rem 1.5rem 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 5rem;
+  flex-wrap: wrap;
+}
+
+/* ── Left message area ──────────────────────────────────────── */
+.main-message {
+  flex: 1;
+  min-width: 320px;
+  max-width: 480px;
+}
+
+.main-message h2 {
+  font-size: 3.8rem;
+  font-weight: 800;
+  margin: 0 0 1.1rem;
+  line-height: 0.95;
+  color: white;
+  letter-spacing: -1px;
+}
+
+.main-message p {
+  font-size: 1.28rem;
+  line-height: 1.55;
+  opacity: 0.92;
+  margin: 0 0 3rem;
+  color: #d1d5db;
+}
+
+.back-to-top-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 1rem 2.6rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.22);
+}
+
+.back-to-top-btn:hover {
+  background: #2563eb;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(59, 130, 246, 0.38);
+}
+
+/* ── Right links ────────────────────────────────────────────── */
+.links-area {
+  display: flex;
+  gap: 4.5rem;
+  flex-wrap: wrap;
+}
+
+.links-column {
+  min-width: 140px;
+}
+
+.links-column h4 {
+  color: #60a5fa;
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.links-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.links-column li {
+  margin-bottom: 0.9rem;
+}
+
+.links-column a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.97rem;
+  transition: color 0.2s ease;
+}
+
+.links-column a:hover {
+  color: #e2e8f0;
+}
+
+/* ── Bottom bar ─────────────────────────────────────────────── */
+.footer-bottom {
+  background: #0b1f3b;
+  border-top: 1px solid #1e3a8a;
+  padding: 2rem 1.5rem;
+  margin-top: 3rem;
+}
+
+.bottom-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  font-size: 0.93rem;
+  color: #94a3b8;
+}
+
+.copyright {
+  font-weight: 400;
+}
+
+.bottom-links {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+}
+
+.bottom-links a {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.bottom-links a:hover {
+  color: #cbd5e1;
+}
+
+.separator {
+  color: #94a3b8;
+  opacity: 0.55;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    gap: 6rem;
+  }
+
+  .links-area {
+    gap: 3.5rem 4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-message h2 {
+    font-size: 3rem;
+  }
+
+  .main-message p {
+    font-size: 1.18rem;
+  }
+
+  .links-area {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .bottom-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-message h2 {
+    font-size: 2.6rem;
+  }
+
+  .back-to-top-btn {
+    padding: 0.9rem 2.2rem;
+    font-size: 1rem;
+  }
+}
+
+/* =====================================
+   PDPD Project Overview Section
+   Fully scoped - no conflicts with other parts
+===================================== */
+
+.pdpd-overview-section {
+  padding: 6rem 8%;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef5ff 100%);
+  color: #0f172a;
+}
+
+.pdpd-overview-wrapper {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.pdpd-overview-text {
+  max-width: 620px;
+}
+
+.pdpd-overview-badge {
+  display: inline-block;
+  background: #dbeafe;
+  color: #1d4ed8;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.pdpd-overview-text h1 {
+  font-size: clamp(2.8rem, 5vw, 3.8rem);
+  font-weight: 800;
+  margin: 0 0 1.5rem;
+  line-height: 1.1;
+  color: #0f172a;
+}
+
+.pdpd-overview-highlight {
+  color: #3b82f6;
+}
+
+.pdpd-overview-lead {
+  font-size: 1.35rem;
+  line-height: 1.6;
+  color: #475569;
+  margin-bottom: 2.5rem;
+}
+
+.pdpd-overview-points {
+  display: grid;
+  gap: 1.8rem;
+  margin: 2rem 0 3rem;
+}
+
+.pdpd-overview-point {
+  display: flex;
+  gap: 1.4rem;
+  align-items: flex-start;
+}
+
+.pdpd-overview-number {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  background: #3b82f6;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.pdpd-overview-security {
+  padding: 1.5rem 1.8rem;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  color: #065f46;
+  margin: 2rem 0;
+}
+
+.pdpd-overview-outcome h3 {
+  color: #1d4ed8;
+  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
+/* Visual side */
+.pdpd-overview-visual {
+  position: relative;
+}
+
+.pdpd-overview-mockup {
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
+  border-radius: 16px;
+  aspect-ratio: 16 / 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 25px 60px rgba(59, 130, 246, 0.25);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.pdpd-overview-mockup-text {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
+  opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .pdpd-overview-wrapper {
+    grid-template-columns: 1fr;
+    gap: 4.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .pdpd-overview-section {
+    padding: 4.5rem 1rem;
+  }
+  
+  .pdpd-overview-text h1 {
+    font-size: 2.6rem;
+  }
+}
+
+.pdpd-overview-mockup {
+  background: none;                    /* no need for gradient anymore */
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(59, 130, 246, 0.22);
+  border: 1px solid rgba(59, 130, 246, 0.12);
+  width: 100%;
+  max-width: 680px;                    /* ← adjust this value according to your preference */
+  margin: 0 auto;                      /* centers the image block */
+  aspect-ratio: auto;                  /* ← important: remove forced ratio */
+}
+
+.pdpd-overview-mockup img {
+  width: 100%;
+  height: auto;                        /* ← preserves natural proportions */
+  display: block;
+  object-fit: contain;                 /* ← key change: shows whole image without cropping */
+  border-radius: 16px;
+  transition: transform 0.35s ease;
+}
+
+.pdpd-overview-mockup img:hover {
+  transform: scale(1.025);
+}
+
+/* Base styles - keep what you have, just make sure these exist */
+.pdpd-overview-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.pdpd-overview-visual {
+  width: 100%;
+}
+
+.pdpd-overview-mockup {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(59, 130, 246, 0.22);
+}
+
+/* Very important for images */
+.pdpd-overview-mockup img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;      /* ← prevents cropping sides */
+}
+
+/* ── Mobile adjustments ──────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .pdpd-overview-section {
+    padding: 4.5rem 5%;
+  }
+
+  .pdpd-overview-wrapper {
+    grid-template-columns: 1fr;     /* stack vertically */
+    gap: 3.5rem;
+  }
+
+  .pdpd-overview-text {
+    text-align: center;             /* better mobile reading */
+  }
+
+  .pdpd-overview-lead,
+  .pdpd-overview-security {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pdpd-overview-points {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .pdpd-overview-section {
+    padding: 3.5rem 4%;
+  }
+
+  .pdpd-overview-text h1 {
+    font-size: 2.4rem;
+  }
+
+  .pdpd-overview-lead {
+    font-size: 1.15rem;
+  }
+
+  .pdpd-overview-mockup {
+    border-radius: 12px;
+    /* Optional: slight reduction for small phones */
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .pdpd-overview-mockup img {
+    border-radius: 12px;
+  }
+}
+
+/* Extra safety for very small screens (iPhone SE, etc.) */
+@media (max-width: 380px) {
+  .pdpd-overview-section {
+    padding-left: 3%;
+    padding-right: 3%;
+  }
+}

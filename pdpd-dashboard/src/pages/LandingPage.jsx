@@ -15,7 +15,10 @@ const LandingPage = () => {
     setActiveTab(activeTab === tabName ? null : tabName);
   };
 
-  const dashImgUrl = 'src/assets/dash.png';
+  // url for images
+  const dashImgUrl = 'src/assets/dash.png'; // src\assets\logins.png
+  const connectedApssImgUrl = 'src/assets/connected-apps.png';
+  const logsImgUrl = 'src/assets/logs.png';
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -51,7 +54,7 @@ const LandingPage = () => {
       <div className="main-wrapper">
         {/* Navbar Section */}
         <nav className="navBarTop">
-          <h1 className="logo">PDP</h1>
+          <h1 className="logo">DPD</h1>
           <div className="tabs" ref={tabsRef}>
             {["product", "privacy", "learn"].map((tab) => (
               <div key={tab} className={`tab-item ${activeTab === tab ? "active" : ""}`}>
@@ -61,22 +64,22 @@ const LandingPage = () => {
                 <div className="dropdown">
                   {tab === "product" && (
                     <>
-                      <a href="#feature1">Dashboard</a>
-                      <a href="#feature2">Privacy Controls</a>
-                      <a href="#feature3">Activity Log</a>
-                      <a href="#feature4">Connected Apps</a>
+                      <a>Dashboard</a>
+                      <a>Privacy Controls</a>
+                      <a>Activity Log</a>
+                      <a>Connected Apps</a>
                     </>
                   )}
                   {tab === "privacy" && (
                     <>
-                      <a href="#scan">Scan Account</a>
-                      <a href="#settings">Settings</a>
+                      <a>Scan Account</a>
+                      <a>Settings</a>
                     </>
                   )}
                   {tab === "learn" && (
                     <>
-                      <a href="#docs">Documentation</a>
-                      <a href="#blog">Blog</a>
+                      <a>Documentation</a>
+                      <a>Blog</a>
                     </>
                   )}
                 </div>
@@ -102,8 +105,8 @@ const LandingPage = () => {
               securely, and transparently.
             </p>
             <div className="hero-actions">
-              <a href="#get-started" className="btn btn-primary">Check Your Privacy</a>
-              <a href="#demo" className="btn btn-secondary">View Demo</a>
+              <a className="btn btn-primary" onClick={() => setActiveForm("signup")}>Check Your Privacy</a>
+              <a className="btn btn-secondary">View Demo</a>
             </div>
           </div>
   
@@ -176,20 +179,92 @@ const LandingPage = () => {
             </svg>
           </div>
         </section>
+
+        <section className="pdpd-overview-section">
+          <div className="pdpd-overview-wrapper">
+            <div className="pdpd-overview-text">
+              <div className="pdpd-overview-badge">Privacy Tool</div>
+              <h1>
+                Personal Data Privacy Dashboard
+                <span className="pdpd-overview-highlight"> (DPD)</span>
+              </h1>
+        
+              <p className="pdpd-overview-lead">
+                A simple, secure way to discover who really has access to your Google account 
+                and take back control of your personal data.
+              </p>
+        
+              <div className="pdpd-overview-points">
+                <div className="pdpd-overview-point">
+                  <div className="pdpd-overview-number">1</div>
+                  <p>Shows all third-party apps still connected to your Google account</p>
+                </div>
+                
+                <div className="pdpd-overview-point">
+                  <div className="pdpd-overview-number">2</div>
+                  <p>Reveals what sensitive permissions those apps were granted</p>
+                </div>
+                
+                <div className="pdpd-overview-point">
+                  <div className="pdpd-overview-number">3</div>
+                  <p>Detects recent logins, unfamiliar devices & suspicious activity</p>
+                </div>
+                
+                <div className="pdpd-overview-point">
+                  <div className="pdpd-overview-number">4</div>
+                  <p>Calculates your personal <strong>privacy risk score</strong></p>
+                </div>
+              </div>
+        
+            <p className="pdpd-overview-security">
+              <strong>Security & Privacy:</strong> We store your email and password (securely hashed) 
+              only for authentication on DPD. For Google account features, we use secure OAuth 2.0 
+              so your Google password is never seen or stored by us. Analysis is performed mostly 
+              client-side when possible.
+            </p>
+        
+              <div className="pdpd-overview-outcome">
+                <h3>What you get</h3>
+                <p>Clear recommendations • One-click revocation options • 
+                   Better understanding of your digital footprint</p>
+              </div>
+            </div>
+        
+            <div className="pdpd-overview-visual">
+              <div className="pdpd-overview-mockup">
+                <img src={dashImgUrl} alt="Dashboard preview" />
+              </div>
+            </div>
+          </div>
+        </section>
   
         {/* Main Dashboard Section */}
         <section className="dashboard-section">
           <div className="dashboard-card-wide">
             <div className="dashboard-left">
-              <h2>Dynamic dashboard</h2>
-              <p>Clause helps legal teams work faster, smarter and more efficiently, delivering visibility and data-driven insights to mitigate risk.</p>
-              <button className="explore-btn">Explore all</button>
+              <h2>Connected Apps Overview</h2>
+              <p>Scan your Google account to see all third-party apps with access, their permissions, 
+              recent login activity, and your overall privacy risk score all in one secure dashboard.</p>
             </div>
   
             <div className="dashboard-right">
-              <img src={dashImgUrl} alt="dashboard-img" />
+              <img src={connectedApssImgUrl} alt="dashboard-img" />
             </div>
           </div>
+        </section>
+
+        <section className="dashboard-section" style={{paddingTop: '0rem'}}>
+          <div className="dashboard-card-wide">
+            <div className="dashboard-left">
+              <h2>Login Activity Overview</h2>
+              <p>Monitor all recent sign-ins to your Google account, detect suspicious activity, 
+               check risk levels and see login locations, devices and IP details in one clear view.</p>
+            </div>
+  
+            <div className="dashboard-right">
+                <img src={logsImgUrl} alt="dashboard-img" />
+              </div>
+            </div>
   
           <div className="feature-grid-row">
             <div className="feature-card-item">
@@ -199,9 +274,9 @@ const LandingPage = () => {
               </div>
               <div className="white-inner-container">
                 <ul className="feature-list">
-                  <li>Connected apps & permissions — see what apps access your account</li>
-                  <li>Login activity — detect suspicious logins quickly</li>
-                  <li>Privacy score — understand your account safety at a glance</li>
+                  <li>Connected apps & permissions see what apps access your account</li>
+                  <li>Login activity detect suspicious logins quickly</li>
+                  <li>Privacy score understand your account safety at a glance</li>
                 </ul>
               </div>
             </div>
@@ -213,14 +288,77 @@ const LandingPage = () => {
               </div>
               <div className="white-inner-container">
                 <ul className="feature-list">
-                  <li>Risk alerts — identify potential privacy vulnerabilities</li>
-                  <li>Settings adjustments — control tracking and app permissions</li>
-                  <li>Security tips — take steps to protect your data easily</li>
+                  <li>Risk alerts identify potential privacy vulnerabilities</li>
+                  <li>Settings adjustments control tracking and app permissions</li>
+                  <li>Security tips take steps to protect your data easily</li>
                 </ul>
               </div>
             </div>
           </div>
         </section>
+
+        <footer className="pdpd-footer">
+          <div className="container">
+            {/* Left - Main message */}
+            <div className="main-message">
+              <h2>DPD</h2>
+              <p>
+                Know who really has access to your data<br />
+                Take back control of your digital privacy
+              </p>
+    
+              <button
+                className="back-to-top-btn"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              >
+                Back to Top ↑
+              </button>
+            </div>
+    
+            {/* Right - Minimal relevant links */}
+            <div className="links-area">
+              <div className="links-column">
+                <h4>Product</h4>
+                <ul>
+                  <li><a>How It Works</a></li>
+                  <li><a>Connect Google Account</a></li>
+                  <li><a>Privacy Score</a></li>
+                </ul>
+              </div>
+    
+              <div className="links-column">
+                <h4>Support</h4>
+                <ul>
+                  <li><a>FAQ</a></li>
+                  <li><a>Contact Us</a></li>
+                </ul>
+              </div>
+    
+              <div className="links-column">
+                <h4>Legal</h4>
+                <ul>
+                  <li><a>Privacy Policy</a></li>
+                  <li><a>Terms of Use</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+    
+          {/* Bottom bar */}
+          <div className="footer-bottom">
+            <div className="bottom-content">
+              <div className="copyright">
+                © {new Date().getFullYear()} DPD – All rights reserved
+              </div>
+    
+              <div className="bottom-links">
+                <a>Privacy Policy</a>
+                <span className="separator">•</span>
+                <a>Terms of Use</a>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
 
       {/* Modal is OUTSIDE the blurred main-wrapper but INSIDE the page-root */}
