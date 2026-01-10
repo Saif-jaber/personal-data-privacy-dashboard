@@ -22,11 +22,6 @@ const Signup = ({ onClose, onSwitch }) => {
           <form className="signup-form">
   
             <div className="form-group">
-              <label>Full Name</label>
-              <input type="text" placeholder="Name" />
-            </div>
-  
-            <div className="form-group">
               <label>Email</label>
               <input type="email" placeholder="you@example.com" />
             </div>

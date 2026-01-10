@@ -217,10 +217,8 @@ const LandingPage = () => {
               </div>
         
             <p className="pdpd-overview-security">
-              <strong>Security & Privacy:</strong> We store your email and password (securely hashed) 
-              only for authentication on DPD. For Google account features, we use secure OAuth 2.0 
-              so your Google password is never seen or stored by us. Analysis is performed mostly 
-              client-side when possible.
+              <strong>Security & Privacy:</strong> We collect and store only the minimum information required to operate this website. This includes your email address and a securely hashed password for authentication purposes. We also record basic login timestamps strictly for security monitoring and system integrity. No device information, IP addresses, location data, browsing activity, or third-party personal data is collected, stored, or shared.
+               For Google sign-in features, authentication is handled via secure OAuth 2.0, and your Google password is never accessed or stored by this website. Wherever possible, data processing is performed on the client side.
             </p>
         
               <div className="pdpd-overview-outcome">
