@@ -1,11 +1,16 @@
 import "./Css/Form.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ErrorMessage from "./ErrorMessage.jsx";
+import SuccessMessage from "./SuccessMessage.jsx";
+import { useEffect } from "react";
+
 
 const Signup = ({ onClose, onSwitch }) => {
 
   const navigate = useNavigate(); 
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState('');  // bad message 
+  const [goodMessage, setGoodMessage] = useState('');  // good message 
 
   //inputs
   const [email, setEmail] = useState('');
@@ -26,6 +31,11 @@ const Signup = ({ onClose, onSwitch }) => {
         return;
       }
 
+      if(password.length < 8){
+        setMessage("password should be atleast 8 characters long");
+        return;
+      }
+
       console.log("Submitting:", { email, password }); // for debugging only 
 
       const data = {email, password};
@@ -36,10 +46,10 @@ const Signup = ({ onClose, onSwitch }) => {
       });
 
       if(res.ok){
-        setMessage("Account created successfully");
+        setGoodMessage("Account created successfully");
         setTimeout(() => {
           navigate("/dashboard");
-        }, 2000);
+        }, 3000);
       }
       else{
         setMessage("something wrong has happened during creation");
@@ -51,9 +61,21 @@ const Signup = ({ onClose, onSwitch }) => {
     }
   }
 
+  useEffect(()=>{
+    if (!message && !goodMessage) return; // nothing to clear
+
+    setTimeout(() => {
+      setMessage('');
+      setGoodMessage('');
+    }, 3000);
+  });
+
     return (
       <div className="signup-wrapper">
         <div className="signup-card">
+
+          {goodMessage && <SuccessMessage message={goodMessage}/>}
+          {message && <ErrorMessage message={message}/>}
 
           <button className="close-btn" onClick={onClose}>
             &times;

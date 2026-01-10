@@ -1,6 +1,8 @@
 import "./Css/Form.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ErrorMessage from "./ErrorMessage.jsx";
+import SuccessMessage from "./SuccessMessage.jsx";
 
 
 const LoginForm = ({ onClose, onSwitch }) => {
@@ -8,6 +10,8 @@ const LoginForm = ({ onClose, onSwitch }) => {
   const [message, setMessage] = useState(''); // for later 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [goodMessage, setGoodMessage] = useState('');
+
   const navigate = useNavigate();
 
   const handleLogin = async (e)=>{
@@ -16,6 +20,11 @@ const LoginForm = ({ onClose, onSwitch }) => {
     try{
       if (!email || !password) {
         setMessage("Email and password are required");
+        return;
+      }
+
+      if(password.length < 8){
+        setMessage("password should be atleast 8 characters long");
         return;
       }
 
@@ -29,10 +38,10 @@ const LoginForm = ({ onClose, onSwitch }) => {
       });
   
       if(res.ok){
-        setMessage("Logged in successfully");
+        setGoodMessage("Logged in successfully");
           setTimeout(() => {
             navigate("/dashboard");
-          }, 2000);
+          }, 3000);
         }
         else{
           setMessage("wrong email or password");
@@ -44,9 +53,21 @@ const LoginForm = ({ onClose, onSwitch }) => {
   }
 }
 
+useEffect(()=>{ // reset message after 3 seconds 
+  if (!message && !goodMessage) return; // nothing to clear
+  
+  setTimeout(() => {
+    setMessage('');
+    setGoodMessage('');
+  }, 3000);
+}, [message, goodMessage])
+
     return (
       <div className="login-wrapper">
         <div className="login-card">
+
+          {goodMessage && <SuccessMessage message={goodMessage}/>}
+          {message && <ErrorMessage message={message}/>}
 
           <button className="close-btn" onClick={onClose}>
             &times;
