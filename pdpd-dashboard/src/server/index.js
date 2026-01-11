@@ -5,6 +5,8 @@ import pool from './db.js';
 import bcrypt from "bcrypt";
 import User from './models/users.js';
 import Log from './models/logs.js';
+import OAuth from './models/oAuth.js';
+import { OAuth2Client } from "google-auth-library";
 
 
 dotenv.config();
@@ -70,6 +72,55 @@ app.post("/login", async (req, res)=>{
 })
 
 //oauth login
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
+app.post("/auth/google", async (req, res) => {// Route to handle Google login
+  try {
+    const { token } = req.body;
+
+    if (!token) return res.status(400).json({ error: "No token provided" });
+
+    // Verify token with Google
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+
+    /*payload contains user info:
+      payload.sub (unique Google ID)
+      payload.email
+      payload.name
+      payload.picture*/
+
+    const user = {
+      googleId: payload.sub,
+      email: payload.email,
+      name: payload.name,
+      picture: payload.picture,
+    };
+    
+    const existingUser = await User.findEmail(user.email);
+
+    if(!existingUser){
+        //create a user from oAuth
+        await User.createUser(user.email, null,"google");
+        res.status(201).json({ message: "User created successfully usign oAuth" }); //success message if user gets created
+        await Log.createLog(user.email); // creates a log for the user that signed up first cuz they will
+    }
+    else{
+        await Log.createLog(user.email); // creates a log for the user that signed up first cuz they will
+        res.status(200).json({ message: "Login successful", user });
+    }
+    
+
+  } catch (err) {
+    console.error(err);
+    res.status(401).json({ error: "Invalid Google token" });
+  }
+});
+
 
 //delete account 
 

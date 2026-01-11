@@ -35,8 +35,16 @@ const user = {
     }, 
 
     //create user to the database
-    async createUser(email, password, auth_provider = "local"){
-        const hashedPassword = await bcrypt.hash(password, 10); // hashing the password from user
+    async createUser(email, password, auth_provider){
+        if(auth_provider === null){
+            auth_provider = "local";
+        }
+        
+        let hashedPassword;
+        if(password){
+           hashedPassword = await bcrypt.hash(password, 10); // hashing the password from user
+        }
+
         // Generate a unique user code
         let user_code;
         let existingUser;

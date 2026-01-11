@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ErrorMessage from "./ErrorMessage.jsx";
 import SuccessMessage from "./SuccessMessage.jsx";
-
+import { useGoogleLogin } from "@react-oauth/google";
 
 const LoginForm = ({ onClose, onSwitch }) => {
 
@@ -14,6 +14,30 @@ const LoginForm = ({ onClose, onSwitch }) => {
 
   const navigate = useNavigate();
 
+  const oauthLoginSuccess = (tokenResponse) => {
+  console.log("OAuth ID Token:", tokenResponse.access_token);
+
+  // Optional: send token to backend
+  fetch("http://localhost:5000/auth/google", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ token: tokenResponse.access_token }),
+  })
+    .then((res) => res.json())
+    .then((data) => console.log("User info:", data))
+    .catch((err) => console.error(err));
+  };
+  
+  const oauthLoginError = () => {
+    console.log("OAuth login failed");
+  };
+  
+  const loginWithGoogle = useGoogleLogin({
+    onSuccess: oauthLoginSuccess,
+    onError: oauthLoginError,
+    flow: "implicit", // popup
+  });
+  
   const handleLogin = async (e)=>{
     e.preventDefault(); // prevent page reload
 
@@ -41,7 +65,7 @@ const LoginForm = ({ onClose, onSwitch }) => {
         setGoodMessage("Logged in successfully");
           setTimeout(() => {
             navigate("/dashboard");
-          }, 3000);
+          }, 2000);
         }
         else{
           setMessage("wrong email or password");
@@ -78,7 +102,7 @@ useEffect(()=>{ // reset message after 3 seconds
             <div className="header-row">
               <h1>Welcome back</h1>
             </div>
-            <p>Sign in to your dashboard</p>
+            <p>log in to your dashboard</p>
           </div>
   
           {/* Form */}
@@ -113,9 +137,15 @@ useEffect(()=>{ // reset message after 3 seconds
               <span></span>
             </div>
   
-            <button type="button" className="secondary-btn">
-              Sign in with Google
+            <button
+              type="button"
+              className="google-button"
+              style={{ gridColumn: 'span 2' }}
+              onClick={loginWithGoogle}
+            >
+              Log in with Google
             </button>
+            
   
             <p className="switch-text">
               Don’t have an account?
