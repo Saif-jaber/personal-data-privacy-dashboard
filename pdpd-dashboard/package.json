@@ -11,7 +11,11 @@
     "start": "concurrently \"npm run dev\" \"nodemon src/server/index.js\""
   },
   "dependencies": {
+    "@babel/core": "^7.28.6",
+    "@babel/preset-react": "^7.28.5",
+    "@babel/register": "^7.28.6",
     "@react-oauth/google": "^0.13.4",
+    "babel": "^5.8.38",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",

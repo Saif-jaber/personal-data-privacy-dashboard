@@ -1,5 +1,6 @@
 import pool from "../db.js";
 import bcrypt from "bcrypt";
+import logs from "./logs.js";
 
 const user = {
 
@@ -36,8 +37,10 @@ const user = {
 
     //create user to the database
     async createUser(email, password, auth_provider){
-        if(auth_provider === null){
-            auth_provider = "local";
+        let isexistingUser = await this.findEmail(email);
+        if(isexistingUser){
+            console.log("User already exists");
+            return;
         }
         
         let hashedPassword;
@@ -61,6 +64,11 @@ const user = {
              RETURNING *`,
             [user_code, email, hashedPassword, auth_provider]
         );
+
+    },
+
+    async logUser(email, password){
+        logs.createLog(email);
 
     }
 }

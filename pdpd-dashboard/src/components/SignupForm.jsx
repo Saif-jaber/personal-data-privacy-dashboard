@@ -1,7 +1,7 @@
 import "./Css/Form.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useGoogleLogin } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 import ErrorMessage from "./ErrorMessage.jsx";
 import SuccessMessage from "./SuccessMessage.jsx";
 
@@ -16,56 +16,38 @@ const Signup = ({ onClose, onSwitch }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  // ── Google Login Hook ────────────────────────────────────────────────
-  const googleLogin = useGoogleLogin({
-    onSuccess: async (response) => {
-      setIsGoogleLoading(true);
-
-      try {
-        const res = await fetch("http://localhost:5000/auth/google", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ code: response.code }),
-        });
-
-        if (!res.ok) {
-          const errorData = await res.json().catch(() => ({}));
-          throw new Error(errorData.message || "Google authentication failed");
-        }
-
-        const data = await res.json();
-
-        console.log("Google login success:", data);
-
-        setGoodMessage("Signed up successfully with Google!");
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 1600);
-      } catch (err) {
-        console.error("Google auth error:", err);
-        setMessage(err.message || "Failed to sign in with Google. Please try again.");
-      } finally {
-        setIsGoogleLoading(false);
+  const handleGoogleSuccess = async (credentialResponse) => {
+    setIsGoogleLoading(true);
+  
+    try {
+      const res = await fetch("http://localhost:5000/auth/google/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          credential: credentialResponse.credential, // ID token
+        }),
+      });
+  
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.message || "Google authentication failed");
       }
-    },
-
-    onError: (errorResponse) => {
-      console.log("Google Login Failed:", errorResponse);
-      setMessage("Google sign up was cancelled or failed");
+  
+      const data = await res.json();
+      console.log("Google login success:", data);
+  
+      setGoodMessage("Signed up successfully with Google!");
+      setTimeout(() => navigate("/dashboard"), 1600);
+    } catch (err) {
+      console.error("Google auth error:", err);
+      setMessage(err.message || "Failed to sign in with Google.");
+    } finally {
       setIsGoogleLoading(false);
-    },
-
-    flow: "auth-code",
-
-    // ──────────────── Important fix ───────────────────────
-    prompt: "select_account",           // ← Forces account chooser every time
-    // prompt: "select_account consent", // More aggressive version (shows consent too)
-
-    access_type: "offline",             // Allows refresh token (good practice)
-    scope: "openid email profile",      // Explicit scopes
-  });
+    }
+  };
+  
 
   const handleManualSignup = async (e) => {
     e.preventDefault();
@@ -95,6 +77,7 @@ const Signup = ({ onClose, onSwitch }) => {
       const data = await res.json();
 
       if (res.ok) {
+        setMessage("");
         setGoodMessage("Account created successfully!");
         setTimeout(() => navigate("/dashboard"), 1800);
       } else {
@@ -112,7 +95,7 @@ const Signup = ({ onClose, onSwitch }) => {
     const timer = setTimeout(() => {
       setMessage("");
       setGoodMessage("");
-    }, 4000);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, [message, goodMessage]);
@@ -176,22 +159,20 @@ const Signup = ({ onClose, onSwitch }) => {
             <span></span>
           </div>
 
-          {/* Google Button */}
-          <button
-            type="button"
-            className={`primary-btn google-button ${isGoogleLoading ? "loading" : ""}`}
-            onClick={() => googleLogin()}
-            disabled={isGoogleLoading}
-          >
-            {isGoogleLoading ? (
-              <span className="loading-text">Connecting...</span>
-            ) : (
-              <>
-                <span className="google-icon">G</span>
-                Sign up with Google
-              </>
-            )}
-          </button>
+          <div className="google-btn-wrapper">
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={() => {
+                setMessage("Google sign up failed or was cancelled");
+              }}
+              useOneTap={false}
+              theme="outline"
+              size="large"
+              width="100%"
+              text="signup_with"
+            />
+          </div>
+          
 
           <p className="switch-text">
             Already have an account?{" "}
