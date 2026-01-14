@@ -126,14 +126,44 @@ app.post("/auth/google/signup", async (req, res) => {
   }
 });
 
-app.post("auth/google/login", async (req, res) => {
-  
-    try {
-        
-    } catch (err) {
-        console.log("error connecting to database :" + err);
+app.post("/auth/google/login", async (req, res) => {
+  try {
+    const { credential } = req.body;
+
+    if (!credential) {
+      return res.status(400).json({ error: "No credential provided" });
     }
+
+    const ticket = await client.verifyIdToken({
+      idToken: credential,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+
+    const user = {
+      googleId: payload.sub,
+      email: payload.email,
+      name: payload.name,
+      picture: payload.picture,
+    };
+
+    await Log.checkUserTable(user.email);
+    await oAuth.checkOAuthUser(user.email, user.googleId);
+    await Log.createLog(user.email);
+
+    // SEND RESPONSE
+    return res.status(200).json({
+      message: "Google login successful",
+      user,
+    });
+
+  } catch (err) {
+    console.error(err);
+    return res.status(401).json({ error: "Invalid Google token" });
+  }
 });
+
 
 //delete account
 

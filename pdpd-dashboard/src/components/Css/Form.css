@@ -387,3 +387,26 @@ a {
 .login-link:hover {
   text-decoration: underline;
 }
+
+.divider {
+  display: flex;
+  align-items: center;        /* vertically centers the text */
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;                    /* stretch lines */
+  height: 1px;
+  background: #d1d5db;        /* line color */
+}
+
+.divider-text {
+  padding: 0 12px;            /* space between text and lines */
+  color: #6b7280;
+  font-weight: 500;
+  white-space: nowrap;         /* prevents wrapping */
+}

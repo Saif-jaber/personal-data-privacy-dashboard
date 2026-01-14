@@ -154,22 +154,25 @@ const Signup = ({ onClose, onSwitch }) => {
           </button>
 
           <div className="divider">
-            <span></span>
             <span className="divider-text">OR</span>
-            <span></span>
-          </div>
+          </div>      
 
-          <div className="google-btn-wrapper">
+          <div className="google-btn-wrapper" style={{ gridColumn: "span 2", width: "100%" }}>
             <GoogleLogin
               onSuccess={handleGoogleSuccess}
-              onError={() => {
-                setMessage("Google sign up failed or was cancelled");
-              }}
+              onError={() => setMessage("Google sign up failed")}
               useOneTap={false}
-              theme="outline"
-              size="large"
-              width="100%"
-              text="signup_with"
+              render={({ onClick, disabled }) => (
+                <button
+                  type="button"
+                  className="google-button"
+                  onClick={onClick}
+                  disabled={disabled || isGoogleLoading}
+                >
+                  <span className="google-icon">G</span>
+                  Sign up with Google
+                </button>
+              )}
             />
           </div>
           

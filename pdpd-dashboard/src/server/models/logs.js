@@ -14,6 +14,17 @@ const logs = {
             console.log("Log created");
         }
     },
+
+    async checkUserTable(email){
+        const result = await pool.query("SELECT email FROM users WHERE email = $1", [email]);
+        if(result.rows.length === 0){ //if user dont exist
+            console.log("User not found");
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 };
 
 export default logs;
