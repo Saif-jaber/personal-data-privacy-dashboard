@@ -64,10 +64,10 @@ const LandingPage = () => {
                 <div className="dropdown">
                   {tab === "product" && (
                     <>
-                      <a>Dashboard</a>
-                      <a>Privacy Controls</a>
-                      <a>Activity Log</a>
-                      <a>Connected Apps</a>
+                      <a href="#dashboard">Dashboard</a>
+                      <a href="#privacy-section">Privacy Controls</a>
+                      <a href="#login-section">Activity Log</a>
+                      <a href="#CApps-section">Connected Apps</a>
                     </>
                   )}
                   {tab === "privacy" && (
@@ -183,7 +183,7 @@ const LandingPage = () => {
         <section className="pdpd-overview-section">
           <div className="pdpd-overview-wrapper">
             <div className="pdpd-overview-text">
-              <div className="pdpd-overview-badge">Privacy Tool</div>
+              <div className="pdpd-overview-badge" id="dashboard">Privacy Tool</div>
               <h1>
                 Personal Data Privacy Dashboard
                 <span className="pdpd-overview-highlight"> (DPD)</span>
@@ -237,7 +237,7 @@ const LandingPage = () => {
         </section>
   
         {/* Main Dashboard Section */}
-        <section className="dashboard-section">
+        <section className="dashboard-section" id="CApps-section">
           <div className="dashboard-card-wide">
             <div className="dashboard-left">
               <h2>Connected Apps Overview</h2>
@@ -251,7 +251,7 @@ const LandingPage = () => {
           </div>
         </section>
 
-        <section className="dashboard-section" style={{paddingTop: '0rem'}}>
+        <section className="dashboard-section" style={{paddingTop: '0rem'}} id="login-section">
           <div className="dashboard-card-wide">
             <div className="dashboard-left">
               <h2>Login Activity Overview</h2>
@@ -264,7 +264,7 @@ const LandingPage = () => {
               </div>
             </div>
   
-          <div className="feature-grid-row">
+          <div className="feature-grid-row" id="privacy-section">
             <div className="feature-card-item">
               <div className="card-top-header">
                 <h3>Privacy Insights</h3>
