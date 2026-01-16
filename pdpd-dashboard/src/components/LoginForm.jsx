@@ -100,10 +100,6 @@ const LoginForm = ({ onClose, onSwitch }) => {
         {goodMessage && <SuccessMessage message={goodMessage} />}
         {message && <ErrorMessage message={message} />}
 
-        <button className="close-btn" onClick={onClose}>
-          ×
-        </button>
-
         {/* Header */}
         <div className="login-header">
           <h1>Welcome back</h1>

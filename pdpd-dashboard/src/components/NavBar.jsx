@@ -18,19 +18,22 @@ const NavBar = () => {
       </div>
 
       {/* ===== Overlay (mobile) ===== */}
-      {open && <div className="overlay" onClick={closeSidebar} />}
+      {open && <div className="overlay active" onClick={closeSidebar} />}
 
       {/* ===== Sidebar ===== */}
       <aside className={`sidebar ${open ? "open" : ""}`}>
         {/* Logo */}
         <div className="sidebar-logo">
           <div className="logo-icon">
-            <img src="src/assets/logo-removebg-preview.png" alt="DataLens logo" />
+            <img
+              src="src/assets/logo-removebg-preview.png"
+              alt="DataLens logo"
+            />
           </div>
           <span className="logo-text">DataLens</span>
 
           {/* Close (mobile only) */}
-          <button className="close-btn" onClick={closeSidebar}>
+          <button className="sidebar-close-btn" onClick={closeSidebar}>
             ✕
           </button>
         </div>
@@ -47,7 +50,11 @@ const NavBar = () => {
               `sidebar-item ${isActive ? "active" : ""}`
             }
           >
-            <img src="src/assets/clapperboard-svgrepo-com.svg" className="icon" alt="" />
+            <img
+              src="src/assets/clapperboard-svgrepo-com.svg"
+              className="icon"
+              alt=""
+            />
             <span>Dashboard</span>
           </NavLink>
 
@@ -58,7 +65,11 @@ const NavBar = () => {
               `sidebar-item ${isActive ? "active" : ""}`
             }
           >
-            <img src="src/assets/mobile-signal-svgrepo-com.svg" className="icon" alt="" />
+            <img
+              src="src/assets/mobile-signal-svgrepo-com.svg"
+              className="icon"
+              alt=""
+            />
             <span>Connected Apps</span>
           </NavLink>
 
@@ -69,7 +80,11 @@ const NavBar = () => {
               `sidebar-item ${isActive ? "active" : ""}`
             }
           >
-            <img src="src/assets/user-lock-alt-svgrepo-com.svg" className="icon" alt="" />
+            <img
+              src="src/assets/user-lock-alt-svgrepo-com.svg"
+              className="icon"
+              alt=""
+            />
             <span>Login Activity</span>
           </NavLink>
 
@@ -80,7 +95,11 @@ const NavBar = () => {
               `sidebar-item ${isActive ? "active" : ""}`
             }
           >
-            <img src="src/assets/desktop-computer-svgrepo-com.svg" className="icon" alt="" />
+            <img
+              src="src/assets/desktop-computer-svgrepo-com.svg"
+              className="icon"
+              alt=""
+            />
             <span>Devices</span>
           </NavLink>
 
@@ -91,7 +110,11 @@ const NavBar = () => {
               `sidebar-item ${isActive ? "active" : ""}`
             }
           >
-            <img src="src/assets/grid-search-svgrepo-com.svg" className="icon" alt="" />
+            <img
+              src="src/assets/grid-search-svgrepo-com.svg"
+              className="icon"
+              alt=""
+            />
             <span>Action Center</span>
           </NavLink>
         </div>
@@ -107,7 +130,11 @@ const NavBar = () => {
               `sidebar-item ${isActive ? "active" : ""}`
             }
           >
-            <img src="src/assets/image-user-svgrepo-com.svg" className="icon" alt="" />
+            <img
+              src="src/assets/image-user-svgrepo-com.svg"
+              className="icon"
+              alt=""
+            />
             <span>Profile</span>
           </NavLink>
 
@@ -118,7 +145,11 @@ const NavBar = () => {
               `sidebar-item ${isActive ? "active" : ""}`
             }
           >
-            <img src="src/assets/gear-svgrepo-com.svg" className="icon" alt="" />
+            <img
+              src="src/assets/gear-svgrepo-com.svg"
+              className="icon"
+              alt=""
+            />
             <span>Settings</span>
           </NavLink>
 
@@ -129,16 +160,24 @@ const NavBar = () => {
               `sidebar-item ${isActive ? "active" : ""}`
             }
           >
-            <img src="src/assets/circle-information-svgrepo-com.svg" className="icon" alt="" />
+            <img
+              src="src/assets/circle-information-svgrepo-com.svg"
+              className="icon"
+              alt=""
+            />
             <span>Tips & Info</span>
           </NavLink>
 
           <NavLink
-            to="/login"
+            to="/"
             onClick={closeSidebar}
             className="sidebar-item logout"
           >
-            <img src="src/assets/exit-svgrepo-com.svg" className="icon" alt="" />
+            <img
+              src="src/assets/exit-svgrepo-com.svg"
+              className="icon"
+              alt=""
+            />
             <span>Logout</span>
           </NavLink>
         </div>

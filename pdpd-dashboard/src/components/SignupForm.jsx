@@ -106,10 +106,6 @@ const Signup = ({ onClose, onSwitch }) => {
         {goodMessage && <SuccessMessage message={goodMessage} />}
         {message && <ErrorMessage message={message} />}
 
-        <button className="close-btn" onClick={onClose}>
-          ×
-        </button>
-
         <div className="signup-header">
           <h1>Create your account</h1>
           <p>Secure access to your dashboard</p>

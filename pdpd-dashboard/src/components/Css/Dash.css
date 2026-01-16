@@ -145,17 +145,19 @@
 
 /* ===== STAT BADGES (SQUARE, SCOPED) ===== */
 .stat-badge {
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  flex-shrink: 0;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
   padding: 0;
-  border-radius: 4px;
+  border-radius: 6px;
 
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   line-height: 1;
 }
@@ -163,6 +165,7 @@
 .stat-badge.success {
   background: #dcfce7;
   color: #16a34a;
+  padding: 0px;
 }
 
 .stat-badge.danger {
@@ -195,28 +198,27 @@
 
 .analytics-item {
   flex: 1;
-  height: 100%;               /* 🔥 REQUIRED */
+  height: 100%; /* 🔥 REQUIRED */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;  /* bars grow from bottom */
+  justify-content: flex-end; /* bars grow from bottom */
   gap: 10px;
 }
 
 .analytics-bar {
   width: 100%;
-  height: 0;                 /* base */
+  height: 0; /* base */
   border-radius: 30px;
   background: repeating-linear-gradient(
     45deg,
-    rgba(255,255,255,0.35),
-    rgba(255,255,255,0.35) 6px,
-    rgba(255,255,255,0.15) 6px,
-    rgba(255,255,255,0.15) 12px
+    rgba(255, 255, 255, 0.35),
+    rgba(255, 255, 255, 0.35) 6px,
+    rgba(255, 255, 255, 0.15) 6px,
+    rgba(255, 255, 255, 0.15) 12px
   );
   transition: height 0.4s ease;
 }
-
 
 .analytics-bar.active {
   background: linear-gradient(135deg, #34d399, #22c55e);
@@ -363,9 +365,7 @@
 
 /* ===== QUICK WARNING HOVER EFFECT ===== */
 .warnings-section li {
-  transition: 
-    transform 0.2s ease,
-    background-color 0.2s ease,
+  transition: transform 0.2s ease, background-color 0.2s ease,
     box-shadow 0.2s ease;
 }
 
