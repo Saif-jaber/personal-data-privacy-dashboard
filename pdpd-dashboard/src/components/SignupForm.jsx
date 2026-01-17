@@ -150,7 +150,7 @@ const Signup = ({ onClose, onSwitch }) => {
           </button>
 
           <div className="divider">
-            <span className="divider-text">OR</span>
+            <h3 className="divider-text">OR</h3>
           </div>      
 
           <div className="google-btn-wrapper" style={{ gridColumn: "span 2", width: "100%" }}>

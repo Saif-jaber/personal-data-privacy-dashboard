@@ -1,0 +1,151 @@
+/* Action.css - Privacy & Security Center (dark theme) */
+
+.privacy-center-page {
+  min-height: 100vh;
+  color: #c9d1d9;
+  padding: 0 0 55px 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Header */
+.page-top-header {
+  margin: 0 0 40px 0;
+}
+
+.page-top-header h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 0 6px 0;
+  color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.page-top-header p {
+  margin: 0;
+  color: #8b949e;
+  font-size: 14.5px;
+}
+
+/* Section with icon + title */
+.section-container {
+  margin-bottom: 48px;
+}
+
+.section-header-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.section-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  object-fit: contain;
+  opacity: 0.95;
+}
+
+.section-header {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #e6edf3;
+}
+
+/* Items list */
+.items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.privacy-row {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  background: #161b22;
+  border: 1px solid #21262d;
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.13s ease, border-color 0.13s ease;
+}
+
+.privacy-row:hover {
+  background: #1e242c;
+  border-color: #30363d;
+}
+
+.row-title {
+  flex: 0 0 34%;
+  font-weight: 500;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.row-description {
+  flex: 1;
+  font-size: 14.5px;
+  color: #8b949e;
+}
+
+.row-arrow-container {
+  flex: 0 0 40px;
+  text-align: right;
+  padding-left: 12px;
+}
+
+/* ── Custom Arrow ──────────────────────────────────────── */
+.custom-arrow {
+  width: 22px;
+  height: 22px;
+  opacity: 0.55;
+  transition: 
+    opacity 0.16s ease,
+    transform 0.24s ease;
+  object-fit: contain;
+}
+
+.privacy-row:hover .custom-arrow {
+  opacity: 0.9;
+  transform: translateX(4px);
+}
+
+/* Footer note */
+.page-bottom-note {
+  margin-top: 36px;
+  text-align: center;
+  color: #6e7681;
+  font-size: 13px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .privacy-center-page {
+    padding: 0 8px 55px 8px;
+  }
+
+  .privacy-row {
+    padding: 14px 16px;
+  }
+
+  .row-arrow-container {
+    padding-left: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .privacy-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 16px 14px;
+  }
+
+  .row-arrow-container {
+    align-self: flex-end;
+    padding-left: 0;
+  }
+}

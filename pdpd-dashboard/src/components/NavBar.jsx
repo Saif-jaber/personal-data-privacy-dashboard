@@ -104,7 +104,7 @@ const NavBar = () => {
           </NavLink>
 
           <NavLink
-            to="/actions"
+            to="/action"
             onClick={closeSidebar}
             className={({ isActive }) =>
               `sidebar-item ${isActive ? "active" : ""}`

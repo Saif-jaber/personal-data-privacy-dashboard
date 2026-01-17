@@ -146,9 +146,7 @@ const LoginForm = ({ onClose, onSwitch }) => {
           </button>
 
           <div className="divider">
-            <span></span>
-            <span className="divider-text">OR</span>
-            <span></span>
+            <h3 className="divider-text">OR</h3>
           </div>
 
           {/* Google login button */}
