@@ -5,7 +5,6 @@ const ActivityRow = ({ log }) => {
 
   return (
     <>
-      {/* Desktop/Tablet row (keeps your table) */}
       <div
         className="table-row"
         onClick={() => setOpen(!open)}
@@ -14,12 +13,11 @@ const ActivityRow = ({ log }) => {
       >
         <span>{log.time}</span>
         <span>{log.email}</span>
-        <span className={`event ${log.status}`}>{log.event}</span>
+        <span className={`event event-${log.status}`}>{log.event}</span>
         <span className={`risk ${log.risk.toLowerCase()}`}>{log.risk}</span>
         <span>{log.device}</span>
       </div>
 
-      {/* Desktop/Tablet expanded details */}
       {open && (
         <div className="row-details">
           <div><strong>IP Address:</strong> {log.ip}</div>
@@ -29,11 +27,10 @@ const ActivityRow = ({ log }) => {
         </div>
       )}
 
-      {/* Mobile full card (shows EVERYTHING, no expand) */}
       <div className="mobile-log-card">
         <div className="mobile-card-top">
           <div className="mobile-card-event">
-            <span className={`event ${log.status}`}>{log.event}</span>
+            <span className={`event event-${log.status}`}>{log.event}</span>
           </div>
           <div className={`risk ${log.risk.toLowerCase()}`}>{log.risk}</div>
         </div>

@@ -37,6 +37,7 @@ const Signup = ({ onClose, onSwitch }) => {
   
       const data = await res.json();
       console.log("Google login success:", data);
+      localStorage.setItem("email", data.user.email);
   
       setGoodMessage("Signed up successfully with Google!");
       setTimeout(() => navigate("/dashboard"), 1600);

@@ -50,7 +50,7 @@ const DevicesPage = () => {
     <div className="devices-page">
       {/* Header */}
       <div className="activity-header">
-        <h1>Devices (3)</h1>
+        <h1>Devices</h1>
         <p>Devices that have recently accessed your account</p>
       </div>
 

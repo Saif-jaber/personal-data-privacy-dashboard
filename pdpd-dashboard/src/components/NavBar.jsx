@@ -154,7 +154,7 @@ const NavBar = () => {
           </NavLink>
 
           <NavLink
-            to="/tips"
+            to="/Tips"
             onClick={closeSidebar}
             className={({ isActive }) =>
               `sidebar-item ${isActive ? "active" : ""}`

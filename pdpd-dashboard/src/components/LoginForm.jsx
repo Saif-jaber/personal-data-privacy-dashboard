@@ -72,6 +72,7 @@ const LoginForm = ({ onClose, onSwitch }) => {
 
       if (res.ok) {
         setGoodMessage("Logged in successfully!");
+        localStorage.setItem("email", data.user.email);
         setTimeout(() => navigate("/dashboard"), 1500);
       } else {
         setMessage(data.message || "Wrong email or password");

@@ -1,8 +1,6 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv"; // .env file usage
-import pool from "./db.js";
-import bcrypt from "bcrypt";
+import dotenv from "dotenv";
 import User from "./models/users.js";
 import Log from "./models/logs.js";
 import oAuth from "./models/oAuth.js";
@@ -13,22 +11,17 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT;
 
-//middleware
+// middleware
 app.use(cors());
 app.use(express.json());
 
-// all routes below
-
+// signup
 app.post("/signup", async (req, res) => {
-  //sign up route
   try {
     const { email, password } = req.body;
 
-    //check inputs if they are missing
     if (!email || !password) {
-      return res
-        .status(400)
-        .json({ message: "Email and password are required" });
+      return res.status(400).json({ message: "Email and password are required" });
     }
 
     const userExists = await User.findEmail(email);
@@ -36,47 +29,53 @@ app.post("/signup", async (req, res) => {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    //create the user
     await User.createUser(email, password, "local");
-    res.status(201).json({ message: "User created successfully" }); //success message if user gets created
-    await Log.createLog(email); // creates a log for the user that signed up first cuz they will be redirected
+    await Log.createLog(email);
+
+    const createdUser = await User.findEmail(email);
+
+    return res.status(201).json({
+      message: "User created successfully",
+      user: createdUser,
+    });
   } catch (err) {
     console.log("error connecting to database :" + err);
+    return res.status(500).json({ message: "Signup failed" });
   }
 });
 
-//login
+// login
 app.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res
-        .status(400)
-        .json({ message: "Email and password are required" });
-    } else {
-      const user = await User.findUser(email, password);
-      console.log("User from DB:", user);
-
-      if (user === null) {
-        // if login is not successfull
-        return res.status(401).json({ message: "Invalid email or password" });
-      } else {
-        // if login is successfull
-        res.status(200).json({ message: "Login successful", user });
-        await Log.createLog(email); // creates a log for the user that logged in
-      }
+      return res.status(400).json({ message: "Email and password are required" });
     }
+
+    const user = await User.findUser(email, password);
+    console.log("User from DB:", user);
+
+    if (user === null) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    await Log.createLog(email);
+
+    return res.status(200).json({
+      message: "Login successful",
+      user,
+    });
   } catch (err) {
     console.log("error connecting to database :" + err);
+    return res.status(500).json({ message: "Login failed" });
   }
 });
 
-//oauth signup + login
+// oauth signup + login
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 app.post("/auth/google/signup", async (req, res) => {
-  // Route to handle Google signup
   try {
     const { credential } = req.body;
 
@@ -91,12 +90,6 @@ app.post("/auth/google/signup", async (req, res) => {
 
     const payload = ticket.getPayload();
 
-    /*payload contains user info:
-      payload.sub (unique Google ID)
-      payload.email
-      payload.name
-      payload.picture*/
-
     const user = {
       googleId: payload.sub,
       email: payload.email,
@@ -107,22 +100,28 @@ app.post("/auth/google/signup", async (req, res) => {
     const existingUser = await User.findEmail(user.email);
 
     if (!existingUser) {
-      //create a user from oAuth
       await User.createUser(user.email, null, "google");
-      await oAuth.createUserOAuth(user.email, "google", user.googleId); //create a oauth user 
-      res.status(201).json({ message: "User created successfully usign oAuth" }); //success message if user gets created
-  
-      await Log.createLog(user.email); // creates a log for the user that signed up first cuz they will
-    }
-    
-    else {
+      await oAuth.createUserOAuth(user.email, "google", user.googleId);
+      await Log.createLog(user.email);
+
+      const createdUser = await User.findEmail(user.email);
+
+      return res.status(201).json({
+        message: "User created successfully using OAuth",
+        user: createdUser,
+      });
+    } else {
       await oAuth.checkOAuthUser(user.email, user.googleId);
-      await Log.createLog(user.email); // creates a log for the user that signed up first cuz they will
-      res.status(200).json({ message: "Login successful", user });
+      await Log.createLog(user.email);
+
+      return res.status(200).json({
+        message: "Login successful",
+        user: existingUser,
+      });
     }
   } catch (err) {
     console.error(err);
-    res.status(401).json({ error: "Invalid Google token" });
+    return res.status(401).json({ error: "Invalid Google token" });
   }
 });
 
@@ -152,20 +151,45 @@ app.post("/auth/google/login", async (req, res) => {
     await oAuth.checkOAuthUser(user.email, user.googleId);
     await Log.createLog(user.email);
 
-    // SEND RESPONSE
+    const foundUser = await User.findEmail(user.email);
+
     return res.status(200).json({
       message: "Google login successful",
-      user,
+      user: foundUser,
     });
-
   } catch (err) {
     console.error(err);
     return res.status(401).json({ error: "Invalid Google token" });
   }
 });
 
+app.post("/getInfo", async (req, res) => {
+  try {
+    console.log("req.body:", req.body);
 
-//delete account
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+
+    const foundUser = await User.findEmail(email);
+    console.log("found user:", foundUser);
+
+    if (!foundUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    return res.status(200).json({
+      userCode: foundUser.user_code,
+      email: foundUser.email,
+      creationDate: foundUser.created_at,
+    });
+  } catch (err) {
+    console.error("getInfo error:", err);
+    return res.status(500).json({ error: "info fetching failed" });
+  }
+});
 
 app.listen(port, () => {
   console.log("server has started on port " + port);

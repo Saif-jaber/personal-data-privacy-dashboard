@@ -81,17 +81,17 @@
 /* STATUS COLORS     */
 /* ================= */
 
-.event.success {
+.event.event-success {
   color: #059669;
   font-weight: 500;
 }
 
-.event.warning {
+.event.event-warning {
   color: #d97706;
   font-weight: 500;
 }
 
-.event.danger {
+.event.event-danger {
   color: #dc2626;
   font-weight: 600;
 }

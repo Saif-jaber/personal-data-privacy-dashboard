@@ -10,6 +10,17 @@ const user = {
         return result.rows[0];
     },
 
+    // finds the user code
+    async findUserCode(email){
+        const result = await pool.query("SELECT user_code FROM users WHERE email = $1", [email]);
+        return result.rows[0].user_code;
+    },
+
+    async findCreationDate(email){
+        const result = await pool.query("SELECT created_at FROM users WHERE email = $1", [email]);
+        return result.rows[0].created_at;
+    },
+
     async findUser(email, password){ // for logging in 
         const user = await this.findEmail(email);
         console.log("User fetched by email:", user);
@@ -69,7 +80,6 @@ const user = {
 
     async logUser(email, password){
         logs.createLog(email);
-
     }
 }
 
