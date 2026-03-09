@@ -85,21 +85,6 @@ const ProfilePage = () => {
     <div className="account-page">
       <div className="profile-main-grid">
         <div className="profile-left-panel">
-          <div className="profile-header">
-            <div className="avatar-wrapper">
-              <div className="avatar-circle">
-                <span>{email ? email[0].toUpperCase() : "G"}</span>
-              </div>
-            </div>
-
-            <div className="profile-header-info">
-              <h1>Profile</h1>
-              <div className="profile-actions">
-                <button className="btn-blue">Upload New Picture</button>
-                <button className="btn-blue-outline">Remove</button>
-              </div>
-            </div>
-          </div>
 
           <div className="profile-form">
             <div className="form-field">
@@ -123,11 +108,20 @@ const ProfilePage = () => {
               </div>
             </div>
 
-            <button className="pushable" type="button">
-              <span className="shadow"></span>
-              <span className="edge"></span>
-              <span className="front">Update</span>
-            </button>
+            <div className="buttons-container">
+              <button className="pushable" type="button">
+                  <span className="shadow"></span>
+                  <span className="edge"></span>
+                  <span className="front">change email</span>
+              </button>
+              
+              <button className="pushable" type="button">
+                <span className="shadow"></span>
+                <span className="edge"></span>
+                <span className="front">change password</span>
+                </button>
+            </div>
+            
           </div>
         </div>
 
