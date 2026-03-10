@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react";
 import ProfileActivityStats from "../components/ProfileActivityStats";
+import ChangeEmailPopup from "../components/ChangeEmail";
 import "./Css/ProfilePage.css";
 
 const ProfilePage = () => {
   const [userCode, setUserCode] = useState("");
   const [email, setEmail] = useState("");
   const [creationDate, setCreationDate] = useState("");
+  const [isPressedEmail, setPressedEmail] = useState(false);  // for change enail pop up
 
   const [stats] = useState({
     totalLogins: 18,
     totalSignOuts: 7,
     totalActivity: 31,
   });
+
+  const handleEmailChangePopup = () => {
+    setPressedEmail(true);
+  }
 
   const handleInfoFetch = async (userEmail) => {
     try {
@@ -83,6 +89,8 @@ const ProfilePage = () => {
 
   return (
     <div className="account-page">
+      {isPressedEmail && <ChangeEmailPopup onClose={() => setPressedEmail(false)} /> }
+        
       <div className="profile-main-grid">
         <div className="profile-left-panel">
 
@@ -112,7 +120,7 @@ const ProfilePage = () => {
               <button className="pushable" type="button">
                   <span className="shadow"></span>
                   <span className="edge"></span>
-                  <span className="front">change email</span>
+                  <span className="front" onClick={()=> handleEmailChangePopup()}>change email</span>
               </button>
               
               <button className="pushable" type="button">
