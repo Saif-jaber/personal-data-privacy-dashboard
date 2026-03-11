@@ -1,12 +1,27 @@
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect} from "react";
+import SecurityQuestionPopup from "./SecurityQuestionPopup.jsx";
 
 import "./Css/Dash.css";
 
 const Dashboard = () => {
   const Navigate = useNavigate();
+
+  const [securityPopupOpen, setSecurityPopupOpen] = useState(false);
+
+  useEffect(() => { // check if security question has been answered or not
+    const hasAnswered = localStorage.getItem("securityQuestionSet"); 
+  
+    if (!hasAnswered) {
+      setSecurityPopupOpen(true);
+    }
+  }, []);
+
   return (
     <div className="dashboard">
+      {securityPopupOpen && <SecurityQuestionPopup/>}
+
       {/* Header */}
       <div className="dashboard-header">
         <h1>Dashboard</h1>

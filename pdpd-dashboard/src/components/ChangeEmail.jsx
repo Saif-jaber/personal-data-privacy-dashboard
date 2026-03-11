@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
 import "./Css/ChangeEmailPopup.css";
 
 const ChangeEmailPopup = ({
@@ -8,7 +7,6 @@ const ChangeEmailPopup = ({
   onClose,
 }) => {
   const [newEmail, setNewEmail] = useState("");
-  const [captchaToken, setCaptchaToken] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
 
   const emailIcon = "src/assets/email-sign-svgrepo-com.svg";
@@ -24,21 +22,15 @@ const ChangeEmailPopup = ({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleCaptcha = (token) => {
-    setCaptchaToken(token);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!newEmail.trim()) return;
-    if (!captchaToken) return;
 
     if (onSubmit) {
       onSubmit({
         oldEmail,
         newEmail,
-        captchaToken,
       });
     }
   };
@@ -84,19 +76,7 @@ const ChangeEmailPopup = ({
             />
           </div>
 
-          <div className="captcha-wrapper">
-            <ReCAPTCHA
-              sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-              onChange={handleCaptcha}
-              size={isMobile ? "compact" : "normal"}
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="email-submit"
-            disabled={!captchaToken}
-          >
+          <button type="submit" className="email-submit">
             Update Email
           </button>
         </form>

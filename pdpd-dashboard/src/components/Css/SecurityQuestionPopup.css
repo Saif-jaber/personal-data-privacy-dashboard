@@ -13,7 +13,7 @@
   z-index: 9999;
 }
 
-.email-popup {
+.security-popup {
   position: relative;
   width: 100%;
   max-width: 380px;
@@ -26,7 +26,7 @@
   z-index: 10000;
 }
 
-.email-form {
+.security-form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -34,7 +34,7 @@
   gap: 18px;
 }
 
-.email-icon {
+.security-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,27 +47,27 @@
     0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
-.email-icon img,
+.security-icon img,
 .custom-icon {
   width: 40px;
   height: 40px;
   object-fit: contain;
 }
 
-.email-note {
+.security-note {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.email-title {
+.security-title {
   font-weight: 700;
   font-size: 18px;
   line-height: 24px;
   color: #f9fafb;
 }
 
-.email-subtitle {
+.security-subtitle {
   font-weight: 500;
   font-size: 13px;
   line-height: 19px;
@@ -87,7 +87,7 @@
   color: #cbd5f5;
 }
 
-.email-input {
+.security-input {
   width: 100%;
   height: 42px;
   padding: 0 12px;
@@ -99,22 +99,21 @@
   transition: all 0.3s ease;
 }
 
-.email-input::placeholder {
+.security-input::placeholder {
   color: #6b7280;
 }
 
-.email-input:focus {
+.security-input:focus {
   border: 1px solid #2563eb;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
 }
 
-.email-input[readonly] {
-  background: #111827;
-  color: #9ca3af;
-  cursor: not-allowed;
+.security-input option {
+  background: #0f172a;
+  color: #f9fafb;
 }
 
-.email-submit {
+.security-submit {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -140,84 +139,85 @@
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.email-submit:hover {
+.security-submit:hover {
   transform: translateY(-1px);
   opacity: 0.95;
 }
 
-.email-submit:active {
+.security-submit:active {
   transform: translateY(0);
 }
 
-.popup-close {
-  position: absolute;
-  top: 10px;
-  right: 14px;
-  background: transparent;
-  border: none;
-  color: #9ca3af;
-  font-size: 18px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  z-index: 10002;
+.security-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* pushes badge to the right */
+  width: 100%;
 }
 
-.popup-close:hover {
-  color: #ffffff;
-  transform: scale(1.1);
-}
-
-* {
-  -webkit-tap-highlight-color: transparent;
-}
-
-*:focus {
-  outline: none !important;
+.mandatory-badge {
+  font-size: 13px;           /* bigger text */
+  font-weight: 700;
+  padding: 6px 12px;         /* bigger badge */
+  border-radius: 8px;
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  letter-spacing: 0.3px;
 }
 
 @media (max-width: 480px) {
+
   .modal-overlay {
     padding: 12px;
-    align-items: center;
   }
 
-  .email-popup {
+  .security-popup {
     max-width: 320px;
   }
 
-  .email-form {
+  .security-form {
     padding: 18px;
     gap: 14px;
   }
 
-  .email-title {
+  .security-header {
+    align-items: center;
+  }
+
+  .security-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .security-icon img,
+  .custom-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .mandatory-badge {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+
+  .security-title {
     font-size: 16px;
     line-height: 22px;
   }
 
-  .email-subtitle {
+  .security-subtitle {
     font-size: 12px;
     line-height: 17px;
   }
 
-  .email-input {
+  .security-input {
     height: 38px;
     font-size: 14px;
   }
 
-  .email-submit {
+  .security-submit {
     height: 38px;
     font-size: 13px;
-  }
-
-  .email-icon {
-    width: 50px;
-    height: 50px;
-  }
-
-  .email-icon img,
-  .custom-icon {
-    width: 28px;
-    height: 28px;
   }
 }
