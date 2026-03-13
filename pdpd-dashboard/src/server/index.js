@@ -5,6 +5,8 @@ import User from "./models/users.js";
 import Log from "./models/logs.js";
 import oAuth from "./models/oAuth.js";
 import { OAuth2Client } from "google-auth-library";
+import securityQs from "./models/securityQs.js";
+
 
 dotenv.config();
 
@@ -188,6 +190,28 @@ app.post("/getInfo", async (req, res) => {
   } catch (err) {
     console.error("getInfo error:", err);
     return res.status(500).json({ error: "info fetching failed" });
+  }
+});
+
+// security question adding route
+app.post("/addSecurityQ", async (req, res) => {
+  try {
+    const { email, questionID, answer } = req.body;
+
+    console.log("req.body:", req.body);
+
+    if (!email || !questionID || !answer) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    await securityQs.addSecurityQ(email, questionID, answer);
+
+    return res.status(200).json({
+      message: "Security question added successfully",
+    });
+  } catch (err) {
+    console.error("adding question error:", err);
+    return res.status(500).json({ error: err.message });
   }
 });
 

@@ -20,10 +20,18 @@ const SecurityQuestionPopup = ({ onSubmit }) => {
 
     if (!securityQuestion.trim() || !securityAnswer.trim()) return;
 
+    const questionID = securityQuestions.indexOf(securityQuestion) + 1;
+
+    if (questionID === 0) {
+      console.log("Question not found");
+      return;
+    }
+
     if (onSubmit) {
       onSubmit({
         securityQuestion,
         securityAnswer,
+        questionID,
       });
     }
   };
@@ -31,10 +39,7 @@ const SecurityQuestionPopup = ({ onSubmit }) => {
   return (
     <div className="modal-overlay">
       <div className="security-popup">
-
         <form className="security-form" onSubmit={handleSubmit}>
-          
-          {/* Icon + Mandatory Badge */}
           <div className="security-header">
             <div className="security-icon">
               <img
@@ -44,9 +49,7 @@ const SecurityQuestionPopup = ({ onSubmit }) => {
               />
             </div>
 
-            <span className="mandatory-badge">
-              Mandatory
-            </span>
+            <span className="mandatory-badge">Mandatory</span>
           </div>
 
           <div className="security-note">
@@ -92,7 +95,6 @@ const SecurityQuestionPopup = ({ onSubmit }) => {
             Save Security Question
           </button>
         </form>
-
       </div>
     </div>
   );

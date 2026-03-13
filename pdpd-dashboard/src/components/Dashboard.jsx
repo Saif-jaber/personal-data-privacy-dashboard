@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import SecurityQuestionPopup from "./SecurityQuestionPopup.jsx";
 
 import "./Css/Dash.css";
@@ -10,27 +10,72 @@ const Dashboard = () => {
 
   const [securityPopupOpen, setSecurityPopupOpen] = useState(false);
 
-  useEffect(() => { // check if security question has been answered or not
-    const hasAnswered = localStorage.getItem("securityQuestionSet"); 
-  
+  useEffect(() => {
+    const hasAnswered = localStorage.getItem("QSet") ? true : false;
+
     if (!hasAnswered) {
       setSecurityPopupOpen(true);
     }
   }, []);
 
+  const handleSecuritySubmit = async ({
+    securityQuestion,
+    securityAnswer,
+    questionID,
+  }) => {
+    try {
+      const email = localStorage.getItem("email");
+
+      console.log("Submitting security question...");
+      console.log("Email:", email);
+      console.log("Question:", securityQuestion);
+      console.log("Question ID:", questionID);
+      console.log("Answer:", securityAnswer);
+
+      if (!email) {
+        console.log("No email found in localStorage");
+        return;
+      }
+
+      const res = await fetch("http://localhost:5000/addSecurityQ", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          questionID,
+          answer: securityAnswer,
+        }),
+      });
+
+      const data = await res.json();
+      console.log("Backend response:", data);
+
+      if (res.ok) {
+        localStorage.setItem("QSet", "true");
+        setSecurityPopupOpen(false);
+        console.log(data.message);
+      } else {
+        console.log(data.error || data.message || "Failed to save security question");
+      }
+    } catch (err) {
+      console.error("Error saving security question:", err);
+    }
+  };
+
   return (
     <div className="dashboard">
-      {securityPopupOpen && <SecurityQuestionPopup/>}
+      {securityPopupOpen && (
+        <SecurityQuestionPopup onSubmit={handleSecuritySubmit} />
+      )}
 
-      {/* Header */}
       <div className="dashboard-header">
         <h1>Dashboard</h1>
         <p>An overview of your personal data and privacy</p>
       </div>
 
-      {/* Cards Grid */}
       <div className="cards-grid">
-        {/* Privacy Score Card */}
         <div className="privacy-score-card">
           <div className="card-top">
             <h3>Privacy Score</h3>
@@ -45,11 +90,15 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Summary Cards */}
         <div className="summary-card">
           <div className="card-top">
             <h4>Connected Apps</h4>
-            <div className="card-icon-outline" onClick={()=> Navigate("/connected-apps")}>↗</div>
+            <div
+              className="card-icon-outline"
+              onClick={() => Navigate("/connected-apps")}
+            >
+              ↗
+            </div>
           </div>
           <div className="summary-value">12</div>
           <div className="summary-change">
@@ -61,7 +110,12 @@ const Dashboard = () => {
         <div className="summary-card">
           <div className="card-top">
             <h4>Suspecious Activity</h4>
-            <div className="card-icon-outline" onClick={()=> Navigate("/login-activity")}>↗</div>
+            <div
+              className="card-icon-outline"
+              onClick={() => Navigate("/login-activity")}
+            >
+              ↗
+            </div>
           </div>
           <div className="summary-value">2</div>
           <div className="summary-change danger">
@@ -73,7 +127,12 @@ const Dashboard = () => {
         <div className="summary-card">
           <div className="card-top">
             <h4>Recent Logins</h4>
-            <div className="card-icon-outline" onClick={()=> Navigate("/login-activity")}>↗</div>
+            <div
+              className="card-icon-outline"
+              onClick={() => Navigate("/login-activity")}
+            >
+              ↗
+            </div>
           </div>
           <div className="summary-value">5</div>
           <div className="summary-change">
@@ -85,7 +144,12 @@ const Dashboard = () => {
         <div className="summary-card">
           <div className="card-top">
             <h4>Active Devices</h4>
-            <div className="card-icon-outline" onClick={()=> Navigate("/devices")}>↗</div>
+            <div
+              className="card-icon-outline"
+              onClick={() => Navigate("/devices")}
+            >
+              ↗
+            </div>
           </div>
           <div className="summary-value">3</div>
           <div className="summary-change">
@@ -95,9 +159,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* ===== ANALYTICS + WARNINGS LAYOUT ===== */}
       <div className="analytics-warnings-grid">
-        {/* Weekly Activity */}
         <div className="weekly-analytics">
           <h3>Weekly Activity</h3>
 
@@ -123,7 +185,6 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Quick Warnings */}
         <div className="warnings-section">
           <h3>Quick Warnings</h3>
           <ul>
@@ -133,7 +194,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Nested pages */}
       <Outlet />
     </div>
   );

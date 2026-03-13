@@ -1,6 +1,5 @@
 import { use } from "react";
 import pool from "../db.js";
-import user from "./users.js";
 
 const oAuth = {
 
