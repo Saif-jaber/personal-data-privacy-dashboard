@@ -198,19 +198,36 @@ app.post("/addSecurityQ", async (req, res) => {
   try {
     const { email, questionID, answer } = req.body;
 
-    console.log("req.body:", req.body);
-
-    if (!email || !questionID || !answer) {
-      return res.status(400).json({ error: "Missing required fields" });
+    if (!email) {
+      return res.status(400).json({ error: "Email is required" });
     }
 
+    const hasSQ = await securityQs.checkSQ(email);
+
+    // If user has no security question yet
+    if (!hasSQ && (!questionID || !answer)) {
+      return res.status(200).json({
+        hasSecurityQuestion: false
+      });
+    }
+
+    // If user already has one
+    if (hasSQ) {
+      return res.status(200).json({
+        hasSecurityQuestion: true
+      });
+    }
+
+    // If frontend sends question + answer then create it
     await securityQs.addSecurityQ(email, questionID, answer);
 
     return res.status(200).json({
-      message: "Security question added successfully",
+      hasSecurityQuestion: true,
+      message: "Security question added successfully"
     });
+
   } catch (err) {
-    console.error("adding question error:", err);
+    console.error("security question error:", err);
     return res.status(500).json({ error: err.message });
   }
 });

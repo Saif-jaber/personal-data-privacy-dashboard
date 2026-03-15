@@ -1,41 +1,79 @@
-import { Outlet } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import SecurityQuestionPopup from "./SecurityQuestionPopup.jsx";
 
 import "./Css/Dash.css";
 
 const Dashboard = () => {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [securityPopupOpen, setSecurityPopupOpen] = useState(false);
+  const [securitySubmitting, setSecuritySubmitting] = useState(false);
+
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   useEffect(() => {
-    const hasAnswered = localStorage.getItem("QSet") ? true : false;
+    const checkSecurityQuestion = async () => {
+      try {
+        const email = localStorage.getItem("email");
 
-    if (!hasAnswered) {
-      setSecurityPopupOpen(true);
-    }
+        if (!email) {
+          console.log("No email found in localStorage");
+          return;
+        }
+
+        const res = await fetch("http://localhost:5000/addSecurityQ", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        });
+
+        const data = await res.json();
+        console.log("Security check response:", data);
+
+        if (res.ok) {
+          if (data.hasSecurityQuestion) {
+            localStorage.setItem("QSet", "true");
+            setSecurityPopupOpen(false);
+          } else {
+            localStorage.setItem("QSet", "false");
+            setSecurityPopupOpen(true);
+          }
+        } else {
+          console.log(data.error || "Failed to check security question");
+        }
+      } catch (err) {
+        console.error("Error checking security question:", err);
+      }
+    };
+
+    checkSecurityQuestion();
   }, []);
 
-  const handleSecuritySubmit = async ({
-    securityQuestion,
-    securityAnswer,
-    questionID,
-  }) => {
+  useEffect(() => {
+    if (securitySubmitting) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [securitySubmitting]);
+
+  const handleSecuritySubmit = async ({ securityAnswer, questionID }) => {
     try {
       const email = localStorage.getItem("email");
-
-      console.log("Submitting security question...");
-      console.log("Email:", email);
-      console.log("Question:", securityQuestion);
-      console.log("Question ID:", questionID);
-      console.log("Answer:", securityAnswer);
 
       if (!email) {
         console.log("No email found in localStorage");
         return;
       }
+
+      setSecuritySubmitting(true);
 
       const res = await fetch("http://localhost:5000/addSecurityQ", {
         method: "POST",
@@ -53,21 +91,30 @@ const Dashboard = () => {
       console.log("Backend response:", data);
 
       if (res.ok) {
+        await delay(2000);
+
         localStorage.setItem("QSet", "true");
         setSecurityPopupOpen(false);
         console.log(data.message);
       } else {
-        console.log(data.error || data.message || "Failed to save security question");
+        console.log(
+          data.error || data.message || "Failed to save security question"
+        );
       }
     } catch (err) {
       console.error("Error saving security question:", err);
+    } finally {
+      setSecuritySubmitting(false);
     }
   };
 
   return (
     <div className="dashboard">
       {securityPopupOpen && (
-        <SecurityQuestionPopup onSubmit={handleSecuritySubmit} />
+        <SecurityQuestionPopup
+          onSubmit={handleSecuritySubmit}
+          isSubmitting={securitySubmitting}
+        />
       )}
 
       <div className="dashboard-header">
@@ -95,7 +142,7 @@ const Dashboard = () => {
             <h4>Connected Apps</h4>
             <div
               className="card-icon-outline"
-              onClick={() => Navigate("/connected-apps")}
+              onClick={() => navigate("/connected-apps")}
             >
               ↗
             </div>
@@ -112,7 +159,7 @@ const Dashboard = () => {
             <h4>Suspecious Activity</h4>
             <div
               className="card-icon-outline"
-              onClick={() => Navigate("/login-activity")}
+              onClick={() => navigate("/login-activity")}
             >
               ↗
             </div>
@@ -129,7 +176,7 @@ const Dashboard = () => {
             <h4>Recent Logins</h4>
             <div
               className="card-icon-outline"
-              onClick={() => Navigate("/login-activity")}
+              onClick={() => navigate("/login-activity")}
             >
               ↗
             </div>
@@ -146,7 +193,7 @@ const Dashboard = () => {
             <h4>Active Devices</h4>
             <div
               className="card-icon-outline"
-              onClick={() => Navigate("/devices")}
+              onClick={() => navigate("/devices")}
             >
               ↗
             </div>
