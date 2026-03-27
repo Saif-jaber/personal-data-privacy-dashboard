@@ -30,6 +30,54 @@ body,
 }
 
 /* ========================
+   THEME SYSTEM (GLOBAL)
+======================== */
+
+:root {
+  --bg: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --card: #f8fafc;
+  --border: #d1d5db;
+  --overlay: rgba(0, 0, 0, 0.5);
+  --input: #ffffff;
+  --analytics-bg: linear-gradient(135deg, #f8fafc, #e5e7eb);
+  --analytics-text: #374151;
+  --analytics-bar: rgba(0, 0, 0, 0.08);
+}
+
+.dark {
+  --bg: #0f1115;
+  --text: #f9fafb;
+  --muted: #9ca3af;
+  --card: #111827;
+  --border: #1f2937;
+  --overlay: rgba(5, 10, 25, 0.78);
+  --input: #0f172a;
+  --analytics-bg: linear-gradient(135deg, #0a1f44, #0e2a66);
+  --analytics-text: #c7d2fe;
+  --analytics-bar: rgba(255, 255, 255, 0.15);
+}
+
+/* LIGHT THEME */
+.light {
+  --bg: #ffffff;
+  --text: #111827;
+  --card: #fafafa;
+  --border: #e5e7eb;
+}
+
+/* APPLY TO WHOLE APP */
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+html, body, #root {
+  background: var(--bg);
+}
+/* ========================
    Theme (Vite defaults)
 ======================== */
 
@@ -39,8 +87,6 @@ body,
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -90,10 +136,6 @@ button:focus-visible {
 ======================== */
 
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
 
   a:hover {
     color: #747bff;
@@ -106,7 +148,7 @@ button:focus-visible {
 
 .layout {
   min-height: 100vh;
-  background: #0f1115;
+  background: var(--bg);
 }
 
 /* Main content */

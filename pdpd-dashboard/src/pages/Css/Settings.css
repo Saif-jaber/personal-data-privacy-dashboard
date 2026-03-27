@@ -1,0 +1,229 @@
+/* Settings.css — matches Action.css dark theme */
+
+.section-icon-svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8b949e;
+  opacity: 0.95;
+}
+
+.section-icon-svg svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Control rows */
+.settings-control-row {
+  display: flex;
+  align-items: center;
+}
+
+.row-control {
+  flex: 0 0 auto;
+  padding-left: 16px;
+  display: flex;
+  align-items: center;
+}
+
+/* Toggle */
+.settings-toggle {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  background: #30363d;
+  border: 1px solid #21262d;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.settings-toggle.on {
+  background: #238636;
+  border-color: #2ea043;
+}
+
+.settings-toggle-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #8b949e;
+  transition: left 0.2s ease, background 0.2s ease;
+  display: block;
+}
+
+.settings-toggle.on .settings-toggle-knob {
+  left: 23px;
+  background: #ffffff;
+}
+
+/* Theme picker */
+.theme-picker {
+  display: flex;
+  gap: 6px;
+}
+
+.theme-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #161b22;
+  border: 1px solid #21262d;
+  border-radius: 6px;
+  color: #8b949e;
+  font-size: 13px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+  transition: background 0.13s ease, border-color 0.13s ease, color 0.13s ease;
+  white-space: nowrap;
+}
+
+.theme-btn:hover {
+  background: #1e242c;
+  border-color: #30363d;
+  color: #c9d1d9;
+}
+
+.theme-btn.active {
+  background: #0d2137;
+  border-color: #1f6feb;
+  color: #58a6ff;
+}
+
+.theme-btn-icon {
+  width: 15px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-btn-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Action button */
+.settings-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: #21262d;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  color: #c9d1d9;
+  font-size: 13px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+  transition: background 0.13s ease, border-color 0.13s ease, opacity 0.13s ease;
+  white-space: nowrap;
+}
+
+.settings-action-btn:hover:not(:disabled) {
+  background: #2d333b;
+  border-color: #444c56;
+}
+
+.settings-action-btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.settings-action-btn.done {
+  border-color: #2ea043;
+  color: #3fb950;
+}
+
+/* Select */
+.settings-select {
+  padding: 6px 10px;
+  background: #21262d;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  color: #c9d1d9;
+  font-size: 13px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.13s ease;
+}
+
+.settings-select:hover {
+  border-color: #444c56;
+}
+
+.settings-select option {
+  background: #161b22;
+}
+
+/* External link row */
+.link-icon-svg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8b949e;
+  opacity: 0.55;
+  transition: opacity 0.16s ease, transform 0.24s ease;
+}
+
+.link-icon-svg svg {
+  width: 18px;
+  height: 18px;
+}
+
+.privacy-row:hover .link-icon-svg {
+  opacity: 0.9;
+  transform: translateX(4px);
+}
+
+/* Shared btn icon */
+.btn-icon {
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.btn-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.btn-icon.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .settings-control-row {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .row-control {
+    padding-left: 0;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .theme-picker {
+    flex-wrap: wrap;
+  }
+}

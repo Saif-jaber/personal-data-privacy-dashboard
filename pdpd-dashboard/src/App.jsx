@@ -9,6 +9,8 @@ import LandingPage from "./pages/LandingPage.jsx";
 import Action from "./pages/Action.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import TipsPage from "./pages/SecurityTipsPage.jsx";
+import SettingsPage from "./pages/SettingsPage.jsx";
+
 
 const App = () => {
   return (
@@ -25,6 +27,7 @@ const App = () => {
         <Route path="/action" element={<Action />}></Route>
         <Route path="/profile" element={<ProfilePage />}></Route>
         <Route path="/Tips" element={<TipsPage />}></Route>
+        <Route path="/settings" element={<SettingsPage />}></Route>
       </Route>
     </Routes>
   );
