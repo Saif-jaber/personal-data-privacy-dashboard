@@ -1,11 +1,11 @@
 .profile-stats-card {
   width: 100%;
   min-width: 0;
-  background: linear-gradient(180deg, #161b22 0%, #11161d 100%);
-  border: 1px solid #21262d;
+  background: var(--stats-card-bg);
+  border: 1px solid var(--border);
   border-radius: 20px;
   padding: 22px 24px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+  box-shadow: var(--shadow);
 }
 
 .profile-stats-header {
@@ -14,7 +14,7 @@
 
 .profile-stats-header h3 {
   margin: 0;
-  color: #ffffff;
+  color: var(--text);
   font-size: 20px;
   font-weight: 700;
 }
@@ -22,7 +22,7 @@
 .profile-stats-subtitle {
   display: inline-block;
   margin-top: 4px;
-  color: #8b949e;
+  color: var(--muted);
   font-size: 13px;
 }
 
@@ -33,6 +33,7 @@
   align-items: center;
 }
 
+/* ===== DONUT ===== */
 .profile-stats-chart-wrap {
   display: flex;
   justify-content: center;
@@ -46,15 +47,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0 0 24px rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 0 24px var(--shadow-soft);
 }
 
 .profile-stats-donut-inner {
   width: 154px;
   height: 154px;
   border-radius: 50%;
-  background: #0f1115;
-  border: 1px solid #21262d;
+  background: var(--card);
+  border: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -62,7 +63,7 @@
 }
 
 .profile-stats-donut-inner span {
-  color: #ffffff;
+  color: var(--text);
   font-size: 38px;
   font-weight: 800;
   line-height: 1;
@@ -70,10 +71,11 @@
 
 .profile-stats-donut-inner small {
   margin-top: 8px;
-  color: #8b949e;
+  color: var(--muted);
   font-size: 14px;
 }
 
+/* ===== LEGEND ===== */
 .profile-stats-legend {
   width: 100%;
   display: grid;
@@ -82,8 +84,8 @@
 }
 
 .stats-item {
-  background: #0f141a;
-  border: 1px solid #21262d;
+  background: var(--card-secondary);
+  border: 1px solid var(--border);
   border-radius: 16px;
   padding: 16px 18px;
   min-width: 0;
@@ -93,7 +95,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #c9d1d9;
+  color: var(--text);
   font-size: 15px;
   margin-bottom: 10px;
 }
@@ -104,20 +106,21 @@
   border-radius: 50%;
 }
 
+/* keep colors for meaning (not theme) */
 .login-dot {
-  background: #3b82f6;
+  background: var(--blue);
 }
 
 .signout-dot {
-  background: #22c55e;
+  background: var(--green);
 }
 
 .activity-dot {
-  background: #8b5cf6;
+  background: var(--purple);
 }
 
 .stats-number {
-  color: #ffffff;
+  color: var(--text);
   font-size: 30px;
   font-weight: 800;
   line-height: 1.1;
@@ -125,10 +128,11 @@
 
 .stats-percent {
   margin-top: 6px;
-  color: #8b949e;
+  color: var(--muted);
   font-size: 14px;
 }
 
+/* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
   .profile-stats-content {
     grid-template-columns: 1fr;

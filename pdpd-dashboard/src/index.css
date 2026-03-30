@@ -44,6 +44,7 @@ body,
   --analytics-bg: linear-gradient(135deg, #f8fafc, #e5e7eb);
   --analytics-text: #374151;
   --analytics-bar: rgba(0, 0, 0, 0.08);
+  --stats-card-bg: linear-gradient(180deg, #f8fafc 0%, #e5e7eb 100%);
 }
 
 .dark {
@@ -57,14 +58,24 @@ body,
   --analytics-bg: linear-gradient(135deg, #0a1f44, #0e2a66);
   --analytics-text: #c7d2fe;
   --analytics-bar: rgba(255, 255, 255, 0.15);
+  --row-hover: rgba(255, 255, 255, 0.06);
+  --stats-card-bg:
+    radial-gradient(circle at 20% 10%, rgba(255,255,255,0.04), transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(255,255,255,0.03), transparent 50%),
+    linear-gradient(180deg, #161b22 0%, #0f141a 100%);
 }
 
 /* LIGHT THEME */
 .light {
-  --bg: #ffffff;
+  --bg: #ececec;
   --text: #111827;
   --card: #fafafa;
-  --border: #e5e7eb;
+  --border: #000000;
+  --row-hover: rgba(0, 0, 0, 0.04);
+  --stats-card-bg:
+    radial-gradient(circle at 20% 10%, rgba(0,0,0,0.04), transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(0,0,0,0.03), transparent 50%),
+    linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
 }
 
 /* APPLY TO WHOLE APP */

@@ -1,5 +1,5 @@
 .login-activity-page {
-  color: #ffffff;
+  color: var(--text) !important;
   width: 100%;
 }
 
@@ -10,10 +10,11 @@
 .activity-header h1 {
   font-size: 24px;
   margin: 0px 0px 4px;
+  color: var(--text) !important;
 }
 
 .activity-header p {
-  color: #9ca3af;
+  color: var(--muted);
   margin-bottom: 24px;
 }
 
@@ -22,8 +23,8 @@
 /* ================= */
 
 .activity-table {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: 14px;
   overflow: hidden;
 }
@@ -33,11 +34,11 @@
   display: grid;
   grid-template-columns: 2fr 2fr 3fr 1fr 2fr;
   padding: 14px 16px;
-  background: #f9fafb;
-  border-bottom: 1px solid #e5e7eb;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
   font-size: 13px;
   font-weight: 600;
-  color: #374151;
+  color: var(--muted);
 }
 
 /* Data rows */
@@ -47,9 +48,9 @@
   padding: 14px 16px;
   align-items: center;
   font-size: 14px;
-  color: #111827;
+  color: var(--text);
   cursor: pointer;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--border);
   transition: background 0.15s ease;
 }
 
@@ -58,23 +59,23 @@
 }
 
 .table-row:hover {
-  background: #f3f4f6;
+  background: var(--row-hover);
 }
 
-/* Expanded details (desktop/tablet only) */
+/* Expanded details */
 .row-details {
-  background: #f9fafb;
-  border-bottom: 1px solid #e5e7eb;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
   padding: 14px 16px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
   font-size: 13px;
-  color: #374151;
+  color: var(--muted);
 }
 
 .row-details strong {
-  color: #111827;
+  color: var(--text);
 }
 
 /* ================= */
@@ -116,11 +117,10 @@
 /* ================= */
 
 .mobile-log-card {
-  display: none; /* hidden on desktop by default */
+  display: none;
 }
 
 @media (max-width: 768px) {
-  /* Hide table view on mobile */
   .activity-table {
     background: transparent;
     border: none;
@@ -132,11 +132,10 @@
     display: none;
   }
 
-  /* Show full cards */
   .mobile-log-card {
     display: block;
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius: 14px;
     padding: 16px;
     margin-bottom: 14px;
@@ -153,7 +152,7 @@
   .mobile-card-event {
     font-size: 14px;
     font-weight: 600;
-    color: #111827;
+    color: var(--text);
   }
 
   .mobile-card-grid {
@@ -170,12 +169,12 @@
 
   .mobile-label {
     font-size: 12px;
-    color: #6b7280;
+    color: var(--muted);
   }
 
   .mobile-value {
     font-size: 13px;
-    color: #111827;
+    color: var(--text);
     word-break: break-word;
   }
 }
@@ -193,12 +192,12 @@
 
 .activity-filters input,
 .activity-filters select {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: var(--input);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 8px 12px;
   font-size: 14px;
-  color: #111827;
+  color: var(--text);
 }
 
 .activity-filters input {

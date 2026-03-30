@@ -101,7 +101,7 @@
 /* ===== SUMMARY CARDS ===== */
 .summary-card {
   background: var(--card);
-  border-color: var(--border);
+  border: 1px solid var(--border);
   color: var(--text);
   padding: 12px 14px 14px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.142);

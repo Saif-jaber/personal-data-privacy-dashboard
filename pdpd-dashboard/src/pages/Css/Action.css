@@ -1,8 +1,8 @@
-/* Action.css - Privacy & Security Center (dark theme) */
+/* Action.css - Privacy & Security Center */
 
 .privacy-center-page {
   min-height: 100vh;
-  color: #c9d1d9;
+  color: var(--text);
   padding: 0 0 55px 0;
   margin: 0;
   box-sizing: border-box;
@@ -17,13 +17,13 @@
   font-size: 24px;
   font-weight: bold;
   margin: 0 0 6px 0;
-  color: #ffffff;
+  color: var(--text);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .page-top-header p {
   margin: 0;
-  color: #8b949e;
+  color: var(--muted);
   font-size: 14.5px;
 }
 
@@ -44,14 +44,14 @@
   height: 24px;
   flex-shrink: 0;
   object-fit: contain;
-  opacity: 0.95;
+  opacity: 0.9;
 }
 
 .section-header {
   margin: 0;
   font-size: 18px;
   font-weight: 600;
-  color: #e6edf3;
+  color: var(--text);
 }
 
 /* Items list */
@@ -65,8 +65,8 @@
   display: flex;
   align-items: center;
   padding: 16px 20px;
-  background: #161b22;
-  border: 1px solid #21262d;
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: 8px;
   text-decoration: none;
   color: inherit;
@@ -74,21 +74,21 @@
 }
 
 .privacy-row:hover {
-  background: #1e242c;
-  border-color: #30363d;
+  background: var(--row-hover);
+  border-color: var(--border);
 }
 
 .row-title {
   flex: 0 0 34%;
   font-weight: 500;
   font-size: 16px;
-  color: #ffffff;
+  color: var(--text);
 }
 
 .row-description {
   flex: 1;
   font-size: 14.5px;
-  color: #8b949e;
+  color: var(--muted);
 }
 
 .row-arrow-container {
@@ -97,11 +97,11 @@
   padding-left: 12px;
 }
 
-/* ── Custom Arrow ──────────────────────────────────────── */
+/* Arrow */
 .custom-arrow {
   width: 22px;
   height: 22px;
-  opacity: 0.55;
+  opacity: 0.6;
   transition: 
     opacity 0.16s ease,
     transform 0.24s ease;
@@ -109,7 +109,7 @@
 }
 
 .privacy-row:hover .custom-arrow {
-  opacity: 0.9;
+  opacity: 1;
   transform: translateX(4px);
 }
 
@@ -117,7 +117,7 @@
 .page-bottom-note {
   margin-top: 36px;
   text-align: center;
-  color: #6e7681;
+  color: var(--muted);
   font-size: 13px;
 }
 
