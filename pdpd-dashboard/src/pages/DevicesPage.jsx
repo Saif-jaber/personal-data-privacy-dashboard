@@ -1,38 +1,54 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Css/Devices.css";
 import DevicesRow from "../components/DevicesRow.jsx";
 import DevicesMobileCard from "../components/DevicesMobileCard.jsx";
 
-const initialDevices = [
-  {
-    id: 1,
-    device: "MacBook Pro · Chrome",
-    platform: "macOS",
-    lastActive: "2 hours ago",
-    status: "active",
-  },
-  {
-    id: 2,
-    device: "Android Phone · Chrome",
-    platform: "Android",
-    lastActive: "Yesterday",
-    status: "recent",
-  },
-  {
-    id: 3,
-    device: "Unknown Device",
-    platform: "Windows",
-    lastActive: "Just now",
-    status: "suspicious",
-  },
-];
-
 const DevicesPage = () => {
+  const [devices, setDevices] = useState([]);
   const [search, setSearch] = useState("");
   const [platform, setPlatform] = useState("all");
   const [status, setStatus] = useState("all");
 
-  const filteredDevices = initialDevices.filter((d) => {
+  useEffect(() => {
+    const fetchDevices = async () => {
+      try {
+        const email = localStorage.getItem("userEmail");
+
+        const res = await fetch("http://localhost:YOUR_PORT/getDevices", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        });
+
+        const data = await res.json();
+
+        if (!data || !Array.isArray(data.devices)) {
+          console.error("Invalid response:", data);
+          setDevices([]);
+          return;
+        }
+
+        const formatted = data.devices.map((d) => ({
+          id: d.id,
+          device: `${d.device_name} · ${d.browser}`,
+          platform: d.os,
+          lastActive: new Date(d.last_active).toLocaleString(),
+          status: "active",
+        }));
+
+        setDevices(formatted);
+      } catch (err) {
+        console.error("Fetch error:", err);
+        setDevices([]);
+      }
+    };
+
+    fetchDevices();
+  }, []);
+
+  const filteredDevices = devices.filter((d) => {
     const matchesSearch = d.device
       .toLowerCase()
       .includes(search.toLowerCase());
@@ -101,9 +117,7 @@ const DevicesPage = () => {
 
       {/* Empty state */}
       {filteredDevices.length === 0 && (
-        <p className="empty-state">
-          No devices match your filters.
-        </p>
+        <p className="empty-state">No devices match your filters.</p>
       )}
 
       {/* Mobile Cards */}

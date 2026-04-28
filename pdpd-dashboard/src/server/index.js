@@ -6,11 +6,12 @@ import Log from "./models/logs.js";
 import oAuth from "./models/oAuth.js";
 import { OAuth2Client } from "google-auth-library";
 import securityQs from "./models/securityQs.js";
-
+import Device from "./models/devices.js";
 
 dotenv.config();
 
 const app = express();
+app.set("trust proxy", true);
 const port = process.env.PORT;
 
 // middleware
@@ -64,6 +65,11 @@ app.post("/login", async (req, res) => {
 
     await Log.createLog(email);
 
+    // ✅ FIXED (was non-blocking → now actually saves to DB)
+    await Device.saveDevice(email, req).catch(err =>
+      console.error("Device save failed:", err)
+    );
+
     return res.status(200).json({
       message: "Login successful",
       user,
@@ -106,6 +112,11 @@ app.post("/auth/google/signup", async (req, res) => {
       await oAuth.createUserOAuth(user.email, "google", user.googleId);
       await Log.createLog(user.email);
 
+      // ✅ FIXED
+      await Device.saveDevice(user.email, req).catch(err =>
+        console.error("Device save failed:", err)
+      );
+
       const createdUser = await User.findEmail(user.email);
 
       return res.status(201).json({
@@ -115,6 +126,11 @@ app.post("/auth/google/signup", async (req, res) => {
     } else {
       await oAuth.checkOAuthUser(user.email, user.googleId);
       await Log.createLog(user.email);
+
+      // ✅ FIXED
+      await Device.saveDevice(user.email, req).catch(err =>
+        console.error("Device save failed:", err)
+      );
 
       return res.status(200).json({
         message: "Login successful",
@@ -152,6 +168,11 @@ app.post("/auth/google/login", async (req, res) => {
     await Log.checkUserTable(user.email);
     await oAuth.checkOAuthUser(user.email, user.googleId);
     await Log.createLog(user.email);
+
+    // ✅ FIXED
+    await Device.saveDevice(user.email, req).catch(err =>
+      console.error("Device save failed:", err)
+    );
 
     const foundUser = await User.findEmail(user.email);
 
@@ -204,21 +225,18 @@ app.post("/addSecurityQ", async (req, res) => {
 
     const hasSQ = await securityQs.checkSQ(email);
 
-    // If user has no security question yet
     if (!hasSQ && (!questionID || !answer)) {
       return res.status(200).json({
         hasSecurityQuestion: false
       });
     }
 
-    // If user already has one
     if (hasSQ) {
       return res.status(200).json({
         hasSecurityQuestion: true
       });
     }
 
-    // If frontend sends question + answer then create it
     await securityQs.addSecurityQ(email, questionID, answer);
 
     return res.status(200).json({
@@ -229,6 +247,23 @@ app.post("/addSecurityQ", async (req, res) => {
   } catch (err) {
     console.error("security question error:", err);
     return res.status(500).json({ error: err.message });
+  }
+});
+
+app.post("/getDevices", async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+
+    const devices = await Device.getDevices(email);
+
+    return res.status(200).json({ devices });
+  } catch (err) {
+    console.error("getDevices error:", err);
+    return res.status(500).json({ error: "Failed to fetch devices" });
   }
 });
 
